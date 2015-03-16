@@ -9,41 +9,48 @@ using System.Configuration;
 using Insight.Database;
 using BudgetPro.Models;
 using System.Threading.Tasks;
+using BudgetPro.Models.Database;
+using System.Data.SqlClient;
+using System.Data.Common;
 
 namespace BudgetPro.Controllers
 {
     [RoutePrefix("api/Household")]
-    public class HouseholdController : ApiController
+    public class HouseholdController : ApiController, IHouseholdDataAccess
     {
-        private ConnectionStringSettings database = ConfigurationManager.ConnectionStrings["DefaultConnection"];
-        
-        // GET: api/Household
-        public async Task<IEnumerable<UserModel>> GetMembers()
+        private IHouseholdDataAccess i = ConfigurationManager.ConnectionStrings["DefaultConnection"].As<IHouseholdDataAccess>();
+        //// GET: api/Household
+        //public async Task<IEnumerable<UserModel>> GetMembers()
+        //{
+        //    var email = User.Identity.GetEmail();
+        //    return await database.Connection().QueryAsync<UserModel>("Security.FindUsers", new { HouseHoldId = "0" });
+        //}
+        //[HttpPost]
+        //public Task GetHouseholdAsync(int id)
+        //{
+        //    return new NotImplementedException();
+        //}
+        [HttpPost]
+        [Route("Create")]
+        public async Task<int> InsertHouseholdAsync([FromBody]string name)
         {
-            var email = User.Identity.GetEmail();
-            return await database.Connection().QueryAsync<UserModel>("Security.FindUsers", new { HouseHoldId = "0" });
+            return await i.InsertHouseholdAsync(name);
         }
-
-        // GET: api/Household/5
-        public string Get(int id)
+        [HttpPost]
+        [Route("Update")]
+        public async Task<int> UpdateHouseholdAsync([FromBody]string name)
         {
-            return "value";
+            return await i.UpdateHouseholdAsync(name);
         }
         // POST: api/Household/Invite
         [HttpPost]
         [Route("Invite")]
-        public string Invite([FromBody]string Email)
+        public Task Invite([FromBody]string Email)
         {
-            return Email + "was invited to join your house.";
+            var conn = ConfigurationManager.ConnectionStrings["DefaultConnection"];
+            object foo = new { FromUserId = User.Identity.GetUserId(), ToEmail = Email};
+            return conn.Connection().ExecuteAsync("InsertInvitationAsync", foo);
         }
-        // PUT: api/Household/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/Household/5
-        public void Delete(int id)
-        {
-        }
+        
     }
 }

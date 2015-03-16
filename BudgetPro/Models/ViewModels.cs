@@ -4,13 +4,15 @@ using System.Collections.Generic;
 
 namespace BudgetPro.Models
 {
-    public class AcctModel
+    public class BudgetItem
     {
-        public AcctModel(){}
+        public BudgetItem() { }
 
-        public string Name{get;set;}
-        public Decimal Balance { get; set; }
-        public Decimal Reconciled { get; set; }
+        public string Description { get; set; }
+        public int CategoryId { get; set; }
+        public int HouseholdId { get; set; }
+        public decimal Amount { get; set; }
+        public int Frequency { get; set; }
 
     }
     public class DashModel
