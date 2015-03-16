@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+
+    <script src="Scripts/jquery-2.1.3.min.js"></script>
+    <script src="Scripts/angular.min.js"></script>
+    <script src="Scripts/angular-ui/ui-bootstrap.min.js"></script>
+    <script src="Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
+    <script src="Scripts/angular-ui-router.min.js"></script>
+    <script src="Scripts/angular-local-storage.min.js"></script>
+
+    <script src="Angular/app.js"></script>
+    <script src="Angular/global/services/authInterceptor.js"></script>
+    <script src="Angular/global/services/authService.js"></script>
+
+    <!--Bootstrap-->
+    <script src="Scripts/bootstrap.min.js"></script>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/css/main.css" rel="stylesheet" />
+    <link href="Content/css/style.css" rel="stylesheet" />
+    <link href="Content/Site.css" rel="stylesheet" />
+    <!--Ui Grid-->
+    <link href="Content/css/ui-grid.css" rel="stylesheet" />
+    <script src="Content/js/ui-grid.min.js"></script>
+    <!--Areas-->
+        <!--Dashboard-->
+            <script src="Angular/dashboard/controllers/dashboardController.js"></script>
+            <script src="Angular/dashboard/controllers/loginController.js"></script>
+            <script src="Angular/dashboard/controllers/registerController.js"></script>
+            <script src="Angular/dashboard/controllers/accmgmtController.js"></script>
+            <script src="Angular/dashboard/controllers/housemgmtController.js"></script>
+            <script src="Angular/dashboard/controllers/transmgmtController.js"></script>
+            <script src="Angular/dashboard/controllers/userprofileController.js"></script>
+        <!--Directives-->
+            <script src="Angular/dashboard/directives/UserInfo.js"></script>
+            <script src="Angular/dashboard/directives/houseManagementDirectives.js"></script>
+        <!--Accounts-->
+            <script src="Angular/accounts/services/accountService.js"></script>
+        <!--Services-->
+            <script src="Angular/dashboard/services/bankSvcs.js"></script>
+            <script src="Angular/dashboard/services/budgetItemSvcs.js"></script>
+            <script src="Angular/dashboard/services/categorySvcs.js"></script>
+            <script src="Angular/dashboard/services/transactionSvcs.js"></script>
+            <script src="Angular/dashboard/services/userSvcs.js"></script>
+            <script src="Angular/dashboard/services/houseSvcs.js"></script>
+</head>
+<body>
+    <div ng-app="app">
+        <div ui-view>
+
+        </div>
+    </div>
+</body>
+</html>

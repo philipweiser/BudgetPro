@@ -1,0 +1,44 @@
+﻿<div>
+    Hi!
+    <div class="row">
+        <div class="col-xs-2">
+            Email
+        </div>
+        <div class="col-xs-2">
+            {{user.Email}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-2">
+            Name
+        </div>
+        <div class="col-xs-2">
+            <input type="text" ng-model="user.Name" ng-value="{{user.Name}}" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-2">
+            Household
+        </div>
+        <div class="col-xs-2">
+            {{user.Household}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-2">
+            PhoneNumber
+        </div>
+        <div class="col-xs-2">
+            {{user.PhoneNumber}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-2">
+            UserName
+        </div>
+        <div class="col-xs-2">
+            {{user.UserName}}
+        </div>
+    </div>
+    <input type="button" ng-click="updateUser()" value="Update User"/>
+</div>
