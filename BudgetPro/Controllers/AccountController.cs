@@ -46,7 +46,7 @@ namespace BudgetPro.Controllers
             model.Id = data.Id;
             model.Email = data.Email;
             model.Name = data.Name;
-            model.Household = data.HouseholdId;
+            model.Household = data.HouseholdId.GetValueOrDefault();
             model.PhoneNumber = data.PhoneNumber;
             model.UserName = data.UserName;
 
@@ -357,7 +357,7 @@ namespace BudgetPro.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email};
+            var user = new ApplicationUser() { UserName = model.UserName, Email = model.Email, Name = model.Name, HouseholdId = null};
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 

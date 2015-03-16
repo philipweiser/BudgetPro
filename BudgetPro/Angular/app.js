@@ -8,32 +8,31 @@
         $stateProvider
             .state('dashboard', {
                 url: '/',
-                templateUrl: '/Angular/dashboard/views/dashboard.html',
+                templateUrl: '/Angular/Areas/dashboard/dashboard.html',
             })
             .state('login', {
                 url: '/login',
-                templateUrl: '/Angular/dashboard/views/login.html',
+                templateUrl: '/Angular/Areas/accounts/views/login.html',
             })
             .state('register', {
                 url: '/register',
-                templateUrl: '/Angular/dashboard/views/register.html',
+                templateUrl: '/Angular/Areas/accounts/views/register.html',
             })
             .state('accmgmt', {
                 url: '/Account',
-                templateUrl: '/Angular/dashboard/views/accmgmt.html',
+                templateUrl: '/Angular/Areas/accounts/views/accmgmt.html',
             })
             .state('housemgmt', {
                 url: '/Household',
-                templateUrl: '/Angular/dashboard/views/housemgmt.html',
+                templateUrl: '/Angular/Areas/household/housemgmt.html',
             })
             .state('transmgmt', {
                 url: '/Transactions',
-                templateUrl: '/Angular/dashboard/views/transmgmt.html',
-
+                templateUrl: '/Angular/Areas/transaction/transmgmt.html',
             })
             .state('userprofile', {
                 url: '/Profile',
-                templateUrl: '/Angular/dashboard/views/userprofile.html',
+                templateUrl: '/Angular/Areas/accounts/views/userprofile.html',
             })
         $httpProvider.defaults.withCredentials = true;
         $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';

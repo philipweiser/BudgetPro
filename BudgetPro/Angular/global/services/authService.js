@@ -23,7 +23,7 @@
 
         var _login = function (loginData) {
 
-            var data = "grant_type=password&username=" + loginData.userName + "&password=" + loginData.password;
+            var data = "grant_type=password&username=" + loginData.Email + "&password=" + loginData.Password;
 
             var deferred = $q.defer();
 

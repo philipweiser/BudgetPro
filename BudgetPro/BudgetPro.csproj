@@ -228,10 +228,11 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\BudgetController.cs" />
     <Compile Include="Controllers\BankController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HouseholdController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\TransactionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -241,6 +242,10 @@
     <Compile Include="Models\Database\UserClaim.cs" />
     <Compile Include="Models\Database\UserLogin.cs" />
     <Compile Include="Models\Extensions\Extensions.cs" />
+    <Compile Include="Models\Interfaces\ITransactionDataAccess.cs" />
+    <Compile Include="Models\Interfaces\IHouseholdDataAccess.cs" />
+    <Compile Include="Models\Interfaces\IBankDataAccess.cs" />
+    <Compile Include="Models\Interfaces\IBudgetDataAccess.cs" />
     <Compile Include="Models\Interfaces\IUserDataAccess.cs" />
     <Compile Include="Models\Stores\InsightUserStore.cs" />
     <Compile Include="Models\ViewModels.cs" />
@@ -250,34 +255,36 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Angular\accounts\services\accountService.js" />
+    <Content Include="Angular\Areas\accounts\services\accountService.js" />
     <Content Include="Angular\app.js" />
-    <Content Include="Angular\dashboard\controllers\accmgmtController.js" />
-    <Content Include="Angular\dashboard\controllers\dashboardController.js" />
-    <Content Include="Angular\dashboard\controllers\housemgmtController.js" />
-    <Content Include="Angular\dashboard\controllers\LoginController.js" />
-    <Content Include="Angular\dashboard\controllers\registerController.js" />
-    <Content Include="Angular\dashboard\controllers\transmgmtController.js" />
-    <Content Include="Angular\dashboard\controllers\userprofileController.js" />
-    <Content Include="Angular\dashboard\directives\houseManagementDirectives.js" />
-    <Content Include="Angular\dashboard\directives\templates\inviteInput.html" />
-    <Content Include="Angular\dashboard\directives\templates\leaveHousehold.html" />
-    <Content Include="Angular\dashboard\directives\templates\memberDisplay.html" />
-    <Content Include="Angular\dashboard\directives\UserInfo.js" />
-    <Content Include="Angular\dashboard\services\bankSvcs.js" />
-    <Content Include="Angular\dashboard\services\budgetItemSvcs.js" />
-    <Content Include="Angular\dashboard\services\categorySvcs.js" />
-    <Content Include="Angular\dashboard\services\houseSvcs.js" />
-    <Content Include="Angular\dashboard\services\transactionSvcs.js" />
-    <Content Include="Angular\dashboard\services\userSvcs.js" />
-    <Content Include="Angular\dashboard\views\accmgmt.html" />
-    <Content Include="Angular\dashboard\views\dashboard.html" />
-    <Content Include="Angular\dashboard\views\housemgmt.html" />
-    <Content Include="Angular\dashboard\views\login.html" />
-    <Content Include="Angular\dashboard\views\register.html" />
-    <Content Include="Angular\dashboard\views\templates\UserInfo.html" />
-    <Content Include="Angular\dashboard\views\transmgmt.html" />
-    <Content Include="Angular\dashboard\views\userprofile.html" />
+    <Content Include="Angular\Areas\bank\accmgmtController.js" />
+    <Content Include="Angular\Areas\budget\budgetController.js" />
+    <Content Include="Angular\Areas\dashboard\dashboardController.js" />
+    <Content Include="Angular\Areas\household\housemgmtController.js" />
+    <Content Include="Angular\Areas\accounts\LoginController.js" />
+    <Content Include="Angular\Areas\accounts\registerController.js" />
+    <Content Include="Angular\Areas\transaction\transmgmtController.js" />
+    <Content Include="Angular\Areas\accounts\userprofileController.js" />
+    <Content Include="Angular\Areas\household\houseManagementDirectives.js" />
+    <Content Include="Angular\Areas\household\templates\createHousehold.html" />
+    <Content Include="Angular\Areas\household\templates\inviteInput.html" />
+    <Content Include="Angular\Areas\household\templates\leaveHousehold.html" />
+    <Content Include="Angular\Areas\household\templates\memberDisplay.html" />
+    <Content Include="Angular\Areas\accounts\directives\UserInfo.js" />
+    <Content Include="Angular\Areas\bank\bankSvcs.js" />
+    <Content Include="Angular\Areas\budget\budgetItemSvcs.js" />
+    <Content Include="Angular\Areas\budget\categorySvcs.js" />
+    <Content Include="Angular\Areas\household\houseSvcs.js" />
+    <Content Include="Angular\Areas\transaction\transactionSvcs.js" />
+    <Content Include="Angular\Areas\accounts\userSvcs.js" />
+    <Content Include="Angular\Areas\accounts\views\accmgmt.html" />
+    <Content Include="Angular\Areas\dashboard\dashboard.html" />
+    <Content Include="Angular\Areas\household\housemgmt.html" />
+    <Content Include="Angular\Areas\accounts\views\login.html" />
+    <Content Include="Angular\Areas\accounts\views\register.html" />
+    <Content Include="Angular\Areas\accounts\views\UserInfo.html" />
+    <Content Include="Angular\Areas\transaction\transmgmt.html" />
+    <Content Include="Angular\Areas\accounts\views\userprofile.html" />
     <Content Include="Angular\global\services\authInterceptor.js" />
     <Content Include="Angular\global\services\authService.js" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
@@ -3153,9 +3160,6 @@
     <Content Include="Scripts\version.json" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Angular\accounts\directives\" />
-    <Folder Include="Angular\accounts\views\" />
-    <Folder Include="Angular\account\directives\" />
     <Folder Include="App_Data\" />
     <Folder Include="Content\img\" />
     <Folder Include="Content\plugins\" />

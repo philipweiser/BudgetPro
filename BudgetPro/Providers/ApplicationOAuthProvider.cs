@@ -12,12 +12,15 @@ using Microsoft.Owin.Security.OAuth;
 using BudgetPro.Models;
 using BudgetPro.Models.Database;
 using Newtonsoft.Json;
+using System.Configuration;
+using Insight.Database;
 
 namespace BudgetPro.Providers
 {
     public class ApplicationOAuthProvider : OAuthAuthorizationServerProvider
     {
         private readonly string _publicClientId;
+        private ConnectionStringSettings database = ConfigurationManager.ConnectionStrings["DefaultConnection"];
 
         public ApplicationOAuthProvider(string publicClientId)
         {
@@ -33,7 +36,10 @@ namespace BudgetPro.Providers
         {
             var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
 
-            ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
+            // take the email i get, look up associated username
+            
+            string email = database.Connection().Query<ApplicationUser>("Security.FindUserByEmail", new { Email = context.UserName})[0].UserName;
+            ApplicationUser user = await userManager.FindAsync(email, context.Password);
 
             if (user == null)
             {
