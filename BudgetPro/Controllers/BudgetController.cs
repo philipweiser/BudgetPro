@@ -12,7 +12,6 @@ using Insight.Database;
 
 namespace BudgetPro.Controllers
 {
-    [Authorize]
     [RoutePrefix("api/Budget")]
     public class BudgetController : ApiController, IBudgetDataAccess
     {
@@ -21,7 +20,7 @@ namespace BudgetPro.Controllers
         [Route("GetBudget")]
         public async Task<IEnumerable<BudgetItem>> GetBudgetItemsForHousehold(int HouseholdId)
         {
-            return await i.GetBudgetItemsForHousehold(HouseholdId);
+            return await i.GetBudgetItemsForHousehold(Convert.ToInt32(User.Identity.GetHouseholdId()));
         }
         [HttpPost]
         [Route("Delete")]

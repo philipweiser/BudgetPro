@@ -6,8 +6,8 @@
         return $http.post('/api/Account/ChangePassword', options)
             .then(function (response) { return response.data });
     };
-    factory.getUserByEmail = function () {
-        return $http.post('/api/Account/GetUserByEmail')
+    factory.getUser = function () {
+        return $http.post('/api/Account/SelectUser', Number(0))
             .then(function (response) { return response.data });
     };
     factory.updateUser = function (user) {

@@ -34,6 +34,10 @@
                 url: '/Profile',
                 templateUrl: '/Angular/Areas/accounts/views/userprofile.html',
             })
+            .state('budget', {
+                url: '/Budget',
+                templateUrl: '/Angular/Areas/budget/budget.html',
+            })
         $httpProvider.defaults.withCredentials = true;
         $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
 

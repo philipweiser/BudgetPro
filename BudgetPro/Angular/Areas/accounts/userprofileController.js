@@ -9,11 +9,14 @@
             Household: '',
             UserName: ''
         };
-        userSvcs.getUserByEmail().then(function (response) {
-            $scope.user = response;
-        });
+        $scope.getUser = function () {
+            userSvcs.getUser().then(function (response) {
+                $scope.user = response;
+            });
+        }
 
         $scope.updateUser= function () {
             userSvcs.updateUser($scope.user);
         }
+        $scope.getUser();
     }]);

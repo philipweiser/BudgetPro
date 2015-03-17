@@ -259,6 +259,7 @@
     <Content Include="Angular\app.js" />
     <Content Include="Angular\Areas\bank\accmgmtController.js" />
     <Content Include="Angular\Areas\budget\budgetController.js" />
+    <Content Include="Angular\Areas\budget\budget.html" />
     <Content Include="Angular\Areas\dashboard\dashboardController.js" />
     <Content Include="Angular\Areas\household\housemgmtController.js" />
     <Content Include="Angular\Areas\accounts\LoginController.js" />

@@ -36,20 +36,19 @@ namespace BudgetPro.Controllers
         {
         }
 
-        [Route("GetUserByEmail")]
+        [Route("SelectUser")]
         [HttpPost]
-        public UserModel GetUserByEmail()
+        public UserModel SelectUser()
         {
             var model = new UserModel();
-            var data = database.Connection().Query<ApplicationUser>("Security.FindUserByEmail", new { Email = "philipkrw@gmail.com"})[0];
-
-            model.Id = data.Id;
+            model.Id = Convert.ToInt32(User.Identity.GetUserId());
+            var data = database.Connection().Single<UserModel>("Security.SelectUser", new { Id = model.Id });
             model.Email = data.Email;
+            model.Id = data.Id;
+            model.HouseholdId = data.HouseholdId;
             model.Name = data.Name;
-            model.Household = data.HouseholdId.GetValueOrDefault();
             model.PhoneNumber = data.PhoneNumber;
             model.UserName = data.UserName;
-
             return model;
         }
         public AccountController(ApplicationUserManager userManager,
@@ -519,5 +518,6 @@ namespace BudgetPro.Controllers
         }
 
         #endregion
+
     }
 }
