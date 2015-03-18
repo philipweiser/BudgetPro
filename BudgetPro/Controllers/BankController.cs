@@ -22,33 +22,38 @@ namespace BudgetPro.Controllers
         private IBankDataAccess i = ConfigurationManager.ConnectionStrings["DefaultConnection"].As<IBankDataAccess>();
         [HttpPost]
         [Route("Create")]
-        public Task CreateBankAsync(string Name, decimal balance)
+        public async Task CreateBankAsync(BankModel foo)
         {
-            UserModel user = new UserModel();
-            user.Id = User.Identity.GetUserId<int>();
-            i.SelectUserAsync(user.Id);
-            return i.CreateBankAsync(user.HouseholdId, Name, balance, balance);
+            var user = await i.SelectUserAsync(User.Identity.GetUserId<int>());
+            
+            if(user.HouseholdId == null)
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+
+            foo.HouseholdId = user.HouseholdId.Value;
+            i.InsertAccountAsync(foo);
         }
         [HttpGet]
         [Route("GetBanks")]
-        public Task GetAccounts(int HouseholdId)
+        public async Task<List<BankModel>> GetAccounts()
         {
-            return Task.FromResult(i.GetAccounts(HouseholdId));
+            var user = await i.SelectUserAsync(User.Identity.GetUserId<int>());
+
+            if (user.HouseholdId == null)
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+
+            return await i.GetAccountsAsync(user.HouseholdId.Value);
         }
         [HttpPost]
         [Route("Delete")]
         public Task DeleteBankAsync(int id)
         {
-            return Task.FromResult(i.DeleteBankAsync(id));
+            return Task.FromResult(i.DeleteAccountAsync(id));
         }
         [HttpPost]
         [Route("Edit")]
-        public Task UpdateBankAsync(int Id, string Name, decimal Balance, decimal ReconciledBalance)
+        public Task UpdateBankAsync(BankModel entry)
         {
-            UserModel user = new UserModel();
-            user.Id = User.Identity.GetUserId<int>();
-            i.SelectUserAsync(user.Id);
-            return i.UpdateAccountAsync(Id, user.HouseholdId, Name, Balance, ReconciledBalance);
+            return i.UpdateAccountAsync(entry);
         }
 
     }

@@ -27,8 +27,8 @@ namespace BudgetPro.Models
         public int Id { get; set; }
         public int HouseholdId { get; set; }
         public string Name { get; set; }
-        public Decimal Balance { get; set; }
-        public Decimal ReconciledBalance { get; set; }
+        public string Balance { get; set; }
+        public string ReconciledBalance { get; set; }
     }
     public class TransModel
     {

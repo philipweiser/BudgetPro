@@ -8,14 +8,14 @@ namespace BudgetPro.Models.Database
     public interface IBankDataAccess
     {
         // user defined procs
-        Task CreateBankAsync(int? HouseholdId, string Name, decimal balance, decimal reconciledBalance);
+        void InsertAccountAsync(BankModel entry);
 
         // auto procs
-        Task GetAccounts(int HouseholdId);
-        Task DeleteBankAsync(int id);
-        Task UpdateAccountAsync(int Id, int? HouseholdId, string Name, decimal Balance, decimal ReconciledBalance);
+        Task<List<BankModel>> GetAccountsAsync(int HouseholdId);
+        Task DeleteAccountAsync(int id);
+        Task UpdateAccountAsync(BankModel entry);
 
         [Sql(Schema = "Security")]
-        void SelectUserAsync(int Id);
+        Task<UserModel> SelectUserAsync(int Id);
     }
 }

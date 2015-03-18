@@ -18,9 +18,9 @@
                 url: '/register',
                 templateUrl: '/Angular/Areas/accounts/views/register.html',
             })
-            .state('accmgmt', {
-                url: '/Account',
-                templateUrl: '/Angular/Areas/accounts/views/accmgmt.html',
+            .state('bank', {
+                url: '/Bank',
+                templateUrl: '/Angular/Areas/bank/bank.html',
             })
             .state('housemgmt', {
                 url: '/Household',

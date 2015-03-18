@@ -12,21 +12,22 @@
     <div class="control-group">
         <label class="control-label" ng-model="newBank.Balance" for="textinput">Balance</label>
         <div class="controls">
-            <input id="textinput" name="textinput" type="number" placeholder="Current Balance" class="input-medium">
+            <input id="textinput" name="textinput" type="text" placeholder="Current Balance" class="input-medium">
             
         </div>
     </div>
     <div class="control-group">
         <label class="control-label" ng-model="newBank.ReconciledBalance" for="textinput">Reconciled Balance</label>
         <div class="controls">
-            <input id="textinput" name="textinput" type="number" placeholder="Reconciled Balance" class="input-medium">
+            <input id="textinput" name="textinput" type="text" placeholder="Reconciled Balance" class="input-medium">
             
         </div>
     </div>
+    <input type="button" value="Create" ng-click="createBank()" />
 
     Delete Account
     <input type="text" ng-model="delBank" placeholder="Account Name" />
-    <input type="button" value="Delete" ng-click="createHousehold()" />
+    <input type="button" value="Delete" ng-click="deleteBank()" />
 
     GetBanks
     <input type="button" value="Show Accounts" ng-click="getBanks()" />
@@ -44,14 +45,14 @@
     <div class="control-group">
         <label class="control-label" for="textinput">Balance</label>
         <div class="controls">
-            <input id="textinput" name="textinput" ng-model="editBank.Balance" type="number" placeholder="Current Balance" class="input-medium">
+            <input id="textinput" name="textinput" ng-model="editBank.Balance" type="text" placeholder="Current Balance" class="input-medium">
             
         </div>
     </div>
     <div class="control-group">
         <label class="control-label" for="textinput">Reconciled Balance</label>
         <div class="controls">
-            <input id="textinput" name="textinput" ng-model="editBank.ReconciledBalance" type="number" placeholder="Reconciled Balance" class="input-medium">
+            <input id="textinput" name="textinput" ng-model="editBank.ReconciledBalance" type="text" placeholder="Reconciled Balance" class="input-medium">
             
         </div>
     </div>
