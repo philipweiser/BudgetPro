@@ -9,7 +9,7 @@ namespace BudgetPro.Models
 {
     public static class Extensions
     {
-        public static string GetHouseholdId(this IIdentity Identity)
+        public static int? GetHouseholdId(this IIdentity Identity)
         {
             if (Identity.IsAuthenticated)
             {
@@ -17,12 +17,12 @@ namespace BudgetPro.Models
                 foreach (var claim in claimsIdentity.Claims)
                 {
                     if (claim.Type == "Household")
-                        return claim.Value;
+                        return Int32.Parse(claim.Value);
                 }
-                return "";
+                return null;
             }
             else
-                return "";
+                return null;
         }
 
         public static string GetEmail(this IIdentity Identity)

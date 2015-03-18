@@ -21,14 +21,28 @@ namespace BudgetPro.Models
     }
     public class HouseModel
     {
-        //public HouseModel() {
-        //    MemberNames = new List<Tuple<string, string>>();
-        //}
-        //public List<Tuple<string, string>> MemberNames { get; set; }
+    }
+    public class BankModel
+    {
+        public int Id { get; set; }
+        public int HouseholdId { get; set; }
+        public string Name { get; set; }
+        public Decimal Balance { get; set; }
+        public Decimal ReconciledBalance { get; set; }
     }
     public class TransModel
     {
-        public TransModel() { }
+        public int id { get; set; }
+        public int AccountId { get; set; }
+        public Decimal Amount { get; set; }
+        public Decimal AbsAmount { get; set; }
+        public Decimal ReconciledAmount { get; set; }
+        public Decimal AbsReconciledAmount { get; set; }
+        public DateTimeOffset Date { get; set; }
+        public string Description { get; set; }
+        public Nullable<DateTimeOffset> Updated { get; set; }
+        public int UpdatedByUserId { get; set; }
+        public int CategoryId { get; set; }
     }
     public class UserModel
     {

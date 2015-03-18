@@ -258,6 +258,7 @@
     <Content Include="Angular\Areas\accounts\services\accountService.js" />
     <Content Include="Angular\app.js" />
     <Content Include="Angular\Areas\bank\accmgmtController.js" />
+    <Content Include="Angular\Areas\bank\bank.html" />
     <Content Include="Angular\Areas\budget\budgetController.js" />
     <Content Include="Angular\Areas\budget\budget.html" />
     <Content Include="Angular\Areas\dashboard\dashboardController.js" />
@@ -266,11 +267,6 @@
     <Content Include="Angular\Areas\accounts\registerController.js" />
     <Content Include="Angular\Areas\transaction\transmgmtController.js" />
     <Content Include="Angular\Areas\accounts\userprofileController.js" />
-    <Content Include="Angular\Areas\household\houseManagementDirectives.js" />
-    <Content Include="Angular\Areas\household\templates\createHousehold.html" />
-    <Content Include="Angular\Areas\household\templates\inviteInput.html" />
-    <Content Include="Angular\Areas\household\templates\leaveHousehold.html" />
-    <Content Include="Angular\Areas\household\templates\memberDisplay.html" />
     <Content Include="Angular\Areas\accounts\directives\UserInfo.js" />
     <Content Include="Angular\Areas\bank\bankSvcs.js" />
     <Content Include="Angular\Areas\budget\budgetItemSvcs.js" />

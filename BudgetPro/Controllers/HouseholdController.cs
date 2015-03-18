@@ -17,44 +17,43 @@ using System.Security.Claims;
 namespace BudgetPro.Controllers
 {
     [RoutePrefix("api/Household")]
-    public class HouseholdController : ApiController, IHouseholdDataAccess
+    public class HouseholdController : ApiController
     {
         private IHouseholdDataAccess i = ConfigurationManager.ConnectionStrings["DefaultConnection"].As<IHouseholdDataAccess>();
-        //// GET: api/Household
-        //public async Task<IEnumerable<UserModel>> GetMembers()
-        //{
-        //    var email = User.Identity.GetEmail();
-        //    return await database.Connection().QueryAsync<UserModel>("Security.FindUsers", new { HouseHoldId = "0" });
-        //}
-        //[HttpPost]
-        //public Task GetHouseholdAsync(int id)
-        //{
-        //    return new NotImplementedException();
-        //}
+        // GET: api/Household
+        [HttpGet]
+        [Route("GetMembers")]
+        public async Task<IEnumerable<UserModel>> GetHouseholdMembers()
+        {
+            var id = User.Identity.GetUserId<int>();
+            return await i.GetHouseholdMembersAsync(id);
+        }
+
+        [HttpPost]
+        [Route("Leave")]
+        public void DeleteHouseholdAsync()
+        {
+            var id = User.Identity.GetUserId<int>();
+            i.DeleteHouseholdAsync(id);
+        }
+
         [HttpPost]
         [Route("Create")]
         public async Task<int?> InsertHouseholdAsync([FromBody]string name)
         {
-            List<UserClaim> claims = (await GetUserClaimsAsync(Convert.ToInt32(User.Identity.GetUserId()))).ToList();
-            foreach (UserClaim c in claims)
+            int userId = User.Identity.GetUserId<int>();
+            var user = new ApplicationUser();
+            user.Id = userId;
+            i.SelectUserAsync(userId);
+            if (user.HouseholdId == null)
             {
-                if (c.ClaimType == "Household" && c.ClaimValue == "")
-                {
-                    // if there is a household claim, check if it is empty. if so, create a claim
-                    var asdf = User.Identity.GetHouseholdId();
-                    var data = await i.InsertHouseholdAsync(name);
-
-                    var theClaim = new UserClaim();
-                    theClaim.UserId = Convert.ToInt32(User.Identity.GetUserId());
-                    theClaim.ClaimType = "Household";
-                    theClaim.ClaimValue = data.ToString();
-
-                    var resultClaim = InsertUserClaimAsync(theClaim);
-                    return data;
-                }
-            }          
-            
-            return null;
+                var foo = await i.InsertHouseholdAsync(name, userId);
+                return foo;
+            }
+            else
+            {
+                return -2; // user already has a household
+            }
         }
         public Task<IList<UserClaim>> GetUserClaimsAsync(int userId)
         {
@@ -74,11 +73,9 @@ namespace BudgetPro.Controllers
         // POST: api/Household/Invite
         [HttpPost]
         [Route("Invite")]
-        public Task Invite([FromBody]string Email)
+        public Task<int> InsertInvitationAsync([FromBody]string Email)
         {
-            var conn = ConfigurationManager.ConnectionStrings["DefaultConnection"];
-            object foo = new { FromUserId = User.Identity.GetUserId(), ToEmail = Email };
-            return conn.Connection().ExecuteAsync("InsertInvitationAsync", foo);
+            return i.InsertInvitationAsync(User.Identity.GetUserId<int>(), Email);
         }
 
     }

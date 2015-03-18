@@ -1,0 +1,59 @@
+﻿<div ng-controller="accmgmtController">
+    {{message}}
+    <!-- Form Name -->
+    <h1>Add New Account</h1>
+    <div class="control-group">
+        <label class="control-label" for="newName">Name</label>
+        <div class="controls">
+            <input id="newName" name="newName" ng-model="newBank.Name" type="text" placeholder="Account Name" class="input-medium">
+            
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" ng-model="newBank.Balance" for="textinput">Balance</label>
+        <div class="controls">
+            <input id="textinput" name="textinput" type="number" placeholder="Current Balance" class="input-medium">
+            
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" ng-model="newBank.ReconciledBalance" for="textinput">Reconciled Balance</label>
+        <div class="controls">
+            <input id="textinput" name="textinput" type="number" placeholder="Reconciled Balance" class="input-medium">
+            
+        </div>
+    </div>
+
+    Delete Account
+    <input type="text" ng-model="delBank" placeholder="Account Name" />
+    <input type="button" value="Delete" ng-click="createHousehold()" />
+
+    GetBanks
+    <input type="button" value="Show Accounts" ng-click="getBanks()" />
+    <div ui-grid="{ data: banks }" id="grid1" class="myGrid">
+    </div>
+
+    <h1>Edit Account</h1>
+    <div class="control-group">
+        <label class="control-label" for="newName">Name</label>
+        <div class="controls">
+            <input id="newName" name="newName" ng-model="editBank.Name" type="text" placeholder="Account Name" class="input-medium">
+            
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="textinput">Balance</label>
+        <div class="controls">
+            <input id="textinput" name="textinput" ng-model="editBank.Balance" type="number" placeholder="Current Balance" class="input-medium">
+            
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="textinput">Reconciled Balance</label>
+        <div class="controls">
+            <input id="textinput" name="textinput" ng-model="editBank.ReconciledBalance" type="number" placeholder="Reconciled Balance" class="input-medium">
+            
+        </div>
+    </div>
+    <input type="button" value="Submit Changes" ng-click="editBank()" />
+</div>

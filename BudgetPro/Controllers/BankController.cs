@@ -17,20 +17,38 @@ namespace BudgetPro.Controllers
 {
     [Authorize]
     [RoutePrefix("api/Bank")]
-    public class BankController : ApiController, IBankDataAccess
+    public class BankController : ApiController
     {
         private IBankDataAccess i = ConfigurationManager.ConnectionStrings["DefaultConnection"].As<IBankDataAccess>();
-        public Task CreateBankAsync(int HouseholdId, string Name, decimal balance)
+        [HttpPost]
+        [Route("Create")]
+        public Task CreateBankAsync(string Name, decimal balance)
         {
-            return Task.FromResult(i.CreateBankAsync(HouseholdId, Name, balance));
+            UserModel user = new UserModel();
+            user.Id = User.Identity.GetUserId<int>();
+            i.SelectUserAsync(user.Id);
+            return i.CreateBankAsync(user.HouseholdId, Name, balance, balance);
         }
+        [HttpGet]
+        [Route("GetBanks")]
         public Task GetAccounts(int HouseholdId)
         {
             return Task.FromResult(i.GetAccounts(HouseholdId));
         }
+        [HttpPost]
+        [Route("Delete")]
         public Task DeleteBankAsync(int id)
         {
             return Task.FromResult(i.DeleteBankAsync(id));
+        }
+        [HttpPost]
+        [Route("Edit")]
+        public Task UpdateBankAsync(int Id, string Name, decimal Balance, decimal ReconciledBalance)
+        {
+            UserModel user = new UserModel();
+            user.Id = User.Identity.GetUserId<int>();
+            i.SelectUserAsync(user.Id);
+            return i.UpdateAccountAsync(Id, user.HouseholdId, Name, Balance, ReconciledBalance);
         }
 
     }

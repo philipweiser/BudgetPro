@@ -15,7 +15,10 @@ background-repeat: repeat-x;
 
 /*********************************************************/
 
-
+.myGrid{
+    width:500px;
+    height:200px;
+}
 
 #wrap {
   margin: 0 auto;
