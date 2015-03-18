@@ -13,7 +13,7 @@ namespace BudgetPro.Models.Database
 
         // auto procs
         Task<bool> DeleteBudgetItemAsync(int id);
-        Task<bool> CreateBudgetItemAsync(string description, int categoryId, int householdId, decimal amount, int frequency);
-        Task<int> UpdateBudgetItemAsync(string description, int categoryId, int householdId, decimal amount, int? frequency);
+        Task<bool> CreateBudgetItemAsync(BudgetItem foo);
+        Task<int> UpdateBudgetItemAsync(BudgetItem foo);
     }
 }

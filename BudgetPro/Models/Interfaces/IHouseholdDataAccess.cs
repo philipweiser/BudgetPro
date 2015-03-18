@@ -10,10 +10,16 @@ namespace BudgetPro.Models.Database
     {
         // user defined procs
         //Task GetHouseholdAsync(int id);
+        
 
         // auto procs
-        Task<int> UpdateHouseholdAsync(string Name);
-        Task<int> InsertHouseholdAsync(string Name);
+        void UpdateHouseholdAsync(string Name);
+        Task<int?> InsertHouseholdAsync(string Name);
+
+        [Sql(Schema="Security")]
+        Task<IList<UserClaim>> GetUserClaimsAsync(int userId);
+        [Sql(Schema = "Security")]
+        Task InsertUserClaimAsync(UserClaim claim);
     }
     //var x = new Household { Name = "Charly" };
     //db.InsertHouseholdAsync(x)

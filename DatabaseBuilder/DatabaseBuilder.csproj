@@ -76,6 +76,9 @@
     <EmbeddedResource Include="SQL\GetRolesForUser.sql" />
     <EmbeddedResource Include="SQL\GetUserClaims.sql" />
     <EmbeddedResource Include="SQL\GetUserLoginsByUserId.sql" />
+    <EmbeddedResource Include="SQL\InsertHousehold.sql">
+      <SubType>Code</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="SQL\IsUserInRole.sql" />
     <EmbeddedResource Include="SQL\RemoveUserClaim.sql" />
     <EmbeddedResource Include="SQL\RemoveUserFromRole.sql" />
@@ -85,9 +88,13 @@
     <EmbeddedResource Include="SQL\Security\Tables\UserLogins.sql" />
     <EmbeddedResource Include="SQL\Security\Tables\UserRoles.sql" />
     <EmbeddedResource Include="SQL\Security\Tables\Users.sql" />
+    <EmbeddedResource Include="SQL\UpdateUserHousehold.sql" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="SQL\SelectUser.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SQL\GetBudgetItemsForHousehold.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

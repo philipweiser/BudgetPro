@@ -14,7 +14,8 @@
             });
     };
     factory.getBudget = function () {
-        $http.post('api/Budget/GetBudget')
+        var options = { HouseholdId: Number(0) };
+        $http.post('api/Budget/GetBudget', options)
             .then(function (response) {
                 console.log(response);
             });

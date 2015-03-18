@@ -16,9 +16,9 @@ namespace BudgetPro.Controllers
     public class BudgetController : ApiController, IBudgetDataAccess
     {
         private IBudgetDataAccess i = ConfigurationManager.ConnectionStrings["DefaultConnection"].As<IBudgetDataAccess>();
-        [HttpGet]
+        [HttpPost]
         [Route("GetBudget")]
-        public async Task<IEnumerable<BudgetItem>> GetBudgetItemsForHousehold(int HouseholdId)
+        public async Task<IEnumerable<BudgetItem>> GetBudgetItemsForHousehold([FromBody]int HouseholdId)
         {
             return await i.GetBudgetItemsForHousehold(Convert.ToInt32(User.Identity.GetHouseholdId()));
         }
@@ -30,15 +30,15 @@ namespace BudgetPro.Controllers
         }
         [HttpPost]
         [Route("Create")]
-        public async Task<bool> CreateBudgetItemAsync(string description, int categoryId, int householdId, decimal amount, int frequency)
+        public async Task<bool> CreateBudgetItemAsync(BudgetItem foo)
         {
-            return await i.CreateBudgetItemAsync(description, categoryId, householdId, amount, frequency);
+            return await i.CreateBudgetItemAsync(foo);
         }
         [HttpPost]
         [Route("Update")]
-        public async Task<int> UpdateBudgetItemAsync(string description, int categoryId, int householdId, decimal amount, int? frequency)
+        public async Task<int> UpdateBudgetItemAsync(BudgetItem foo)
         {
-            return await i.UpdateBudgetItemAsync(description, categoryId, householdId, amount, frequency);
+            return await i.UpdateBudgetItemAsync(foo);
         }
     }
 }
