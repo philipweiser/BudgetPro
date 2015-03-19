@@ -41,19 +41,24 @@ namespace BudgetPro.Controllers
             if (user.HouseholdId == null)
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
 
-            return await i.GetAccountsAsync(user.HouseholdId.Value);
+            return await i.FindAccountsAsync(user.HouseholdId.Value);
         }
         [HttpPost]
         [Route("Delete")]
-        public Task DeleteBankAsync(int id)
+        public Task DeleteBankAsync([FromBody]int id)
         {
-            return Task.FromResult(i.DeleteAccountAsync(id));
+            return i.DeleteAccountAsync(id);
         }
         [HttpPost]
         [Route("Edit")]
-        public Task UpdateBankAsync(BankModel entry)
+        public async Task<int> UpdateBankAsync(BankModel entry)
         {
-            return i.UpdateAccountAsync(entry);
+            var user = await i.SelectUserAsync(User.Identity.GetUserId<int>());
+
+            if (user.HouseholdId == null)
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            entry.HouseholdId = user.HouseholdId.Value;
+            return await i.UpdateAccountAsync(entry);
         }
 
     }

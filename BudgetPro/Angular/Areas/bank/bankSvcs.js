@@ -2,29 +2,18 @@
     var factory = {};
 
     factory.createBank = function (newBank) {
-        var options = {
-            Name : newBank.Name,
-            Balance: newBank.Balance,
-            ReconciledBalance : newBank.ReconciledBalance
-        };
-        return $http.post('api/Bank/Create', options);
+        return $http.post('api/Bank/Create', newBank);
     };
     factory.deleteBank = function (delBank) {
-        var options = {
-            id : delBank
-        };
-        return $http.post('api/Bank/Delete', options);
+        return $http.post('api/Bank/Delete/', delBank);
     };
     factory.getBanks = function () {
-        return $http.get('api/Bank/GetBanks', options).then(function (response) {
+        return $http.get('api/Bank/GetBanks').then(function (response) {
             return response.data;
         });
     };
-    factory.updateBanks = function (editBank) {
-        var options = {
-
-        };
-        return $http.post('api/Bank/Edit', options);
+    factory.updateBank = function (editBank) {
+        return $http.post('api/Bank/Edit', editBank);
     };
     return factory;
 }]);

@@ -34,10 +34,10 @@ namespace BudgetPro.Models
     {
         public int id { get; set; }
         public int AccountId { get; set; }
-        public Decimal Amount { get; set; }
-        public Decimal AbsAmount { get; set; }
-        public Decimal ReconciledAmount { get; set; }
-        public Decimal AbsReconciledAmount { get; set; }
+        public string Amount { get; set; }
+        public string AbsAmount { get; set; }
+        public string ReconciledAmount { get; set; }
+        public string AbsReconciledAmount { get; set; }
         public DateTimeOffset Date { get; set; }
         public string Description { get; set; }
         public Nullable<DateTimeOffset> Updated { get; set; }

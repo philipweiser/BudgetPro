@@ -18,12 +18,10 @@
             };
             $scope.createBank = function () {
                 bankSvcs.createBank($scope.newBank).then(function (response) {
-                    console.log(response);
                 });
             }
             $scope.deleteBank = function () {
                 bankSvcs.deleteBank($scope.delBank).then(function (response) {
-                    console.log(response);
                 });
             }
             $scope.getBanks = function () {
@@ -31,9 +29,8 @@
                     $scope.banks = response;
                 });
             }
-            $scope.editBank = function () {
-                bankSvcs.editBank($scope.editBank).then(function (response) {
-                    console.log(response);
+            $scope.editBankSubmit = function () {
+                bankSvcs.updateBank($scope.editBank).then(function (response) {
                 });
             }
         }])

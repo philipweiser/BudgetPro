@@ -13,7 +13,7 @@ namespace BudgetPro.Models.Database
         
 
         // auto procs
-        void UpdateHouseholdAsync(string Name);
+        Task<int> UpdateHouseholdAsync(string Name);
         Task<int?> InsertHouseholdAsync(string Name, int userId);
         Task<int> InsertInvitationAsync(int FromUserId, string ToEmail);
         void DeleteHouseholdAsync(int Id);
