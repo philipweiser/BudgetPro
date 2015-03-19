@@ -1,16 +1,18 @@
 ﻿<div ng-controller="budgetController">
     This is the budget
     {{budgetItem.Id}}
-    <input type="text" placeholder="Id" ng-model="budgetItem.Id" ng-value="budgetItem.Id" />
+    <input type="text" placeholder="Id" ng-model="budgetItem.Id"/>
     <input type="text" placeholder="Description" ng-model="budgetItem.Description" />
     <input type="text" placeholder="CategoryId" ng-model="budgetItem.CategoryId" />
-    <input type="text" placeholder="HouseholdId" ng-model="budgetItem.HouseholdId" />
     <input type="text" placeholder="Amount" ng-model="budgetItem.Amount" />
     <input type="text" placeholder="Frequency" ng-model="budgetItem.Frequency" />
-    <input type="text" placeholder="ReconciledAmount" ng-model="budgetItem.ReconciledAmount" />
+    
 
     <input type="button" ng-click="getBudget()" value="Get Budget" />
     <input type="button" ng-click="createBudget()" value="Create Budget" />
     <input type="button" ng-click="deleteBudgetItem()" value="Delete BudgetItem" />
     <input type="button" ng-click="updateBudgetItem()" value="Update BudgetItem" />
+
+    <div ui-grid="{ data: budgetItems }" id="grid1" class="myGrid">
+    </div>
 </div>

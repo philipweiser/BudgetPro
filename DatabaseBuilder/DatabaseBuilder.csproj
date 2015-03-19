@@ -94,9 +94,6 @@
     <EmbeddedResource Include="SQL\SelectUser.sql" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="SQL\GetBudgetItemsForHousehold.sql" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="SQL\GetHouseholdMembers.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

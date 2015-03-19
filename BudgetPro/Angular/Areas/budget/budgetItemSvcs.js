@@ -2,28 +2,27 @@
     var factory = {};
 
     factory.createBudgetItem = function (foo) {
-        $http.post('api/Budget/Create', foo)
+        return $http.post('api/Budget/Create', foo)
             .then(function (response) {
-                console.log(response);
+                return response.data;
             });
     };
     factory.deleteBudgetItem = function (id) {
-        $http.post('api/Budget/Delete', new { id: id })
+        return $http.post('api/Budget/Delete', id)
             .then(function (response) {
-                console.log(response);
+                return response.data;
             });
     };
     factory.getBudget = function () {
-        var options = { HouseholdId: Number(0) };
-        $http.post('api/Budget/GetBudget', options)
+        return $http.get('api/Budget/GetBudget')
             .then(function (response) {
-                console.log(response);
+                return response.data;
             });
     };
     factory.updateBudgetItem = function () {
-        $http.post('api/Budget/Update')
+        return $http.post('api/Budget/Update')
             .then(function (response) {
-                console.log(response);
+                return response.data;
             });
     };
     return factory;

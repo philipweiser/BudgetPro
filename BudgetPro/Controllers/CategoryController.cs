@@ -16,49 +16,49 @@ using System.Data.Common;
 namespace BudgetPro.Controllers
 {
     [Authorize]
-    [RoutePrefix("api/Bank")]
-    public class BankController : ApiController
+    [RoutePrefix("api/Category")]
+    public class CategoryController : ApiController
     {
-        private IBankDataAccess i = ConfigurationManager.ConnectionStrings["DefaultConnection"].As<IBankDataAccess>();
+        private ICategoryDataAccess i = ConfigurationManager.ConnectionStrings["DefaultConnection"].As<ICategoryDataAccess>();
         [HttpPost]
         [Route("Create")]
-        public async Task<int> CreateBankAsync(BankModel foo)
+        public async Task<int> CreateCategoryAsync(CategoryModel entry)
         {
             var user = await i.SelectUserAsync(User.Identity.GetUserId<int>());
             
             if(user.HouseholdId == null)
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
 
-            foo.HouseholdId = user.HouseholdId.Value;
-            return await i.InsertAccountAsync(foo);
+            entry.HouseholdId = user.HouseholdId.Value;
+            return await i.InsertCategoryAsync(entry);
         }
         [HttpGet]
-        [Route("GetBanks")]
-        public async Task<List<BankModel>> GetAccounts()
+        [Route("GetCategories")]
+        public async Task<List<CategoryModel>> GetCategories()
         {
             var user = await i.SelectUserAsync(User.Identity.GetUserId<int>());
 
             if (user.HouseholdId == null)
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
 
-            return await i.FindAccountsAsync(user.HouseholdId.Value);
+            return await i.FindCategoriesAsync(user.HouseholdId.Value);
         }
         [HttpPost]
         [Route("Delete")]
-        public Task DeleteBankAsync([FromBody]int id)
+        public Task DeleteCategoryAsync([FromBody]int id)
         {
-            return i.DeleteAccountAsync(id);
+            return i.DeleteCategoryAsync(id);
         }
         [HttpPost]
         [Route("Edit")]
-        public async Task<int> UpdateBankAsync(BankModel entry)
+        public async Task<int> UpdateCategoryAsync(CategoryModel entry)
         {
             var user = await i.SelectUserAsync(User.Identity.GetUserId<int>());
 
             if (user.HouseholdId == null)
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
             entry.HouseholdId = user.HouseholdId.Value;
-            return await i.UpdateAccountAsync(entry);
+            return await i.UpdateCategoryAsync(entry);
         }
 
     }

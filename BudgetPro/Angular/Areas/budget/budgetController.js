@@ -5,15 +5,14 @@
             Id: '5',
             Description: '',
             CategoryId: '',
-            HouseholdId: '',
             Amount: '',
-            Frequency: '',
-            ReconciledAmount: ''
+            Frequency: ''
         };
+        $scope.budgetItems = '';
         $scope.getBudget = function () {
             budgetItemSvcs.getBudget()
                 .then(function (response) {
-                    console.log(response);
+                    $scope.budgetItems = response;
                 });
         };
         $scope.createBudget = function () {

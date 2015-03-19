@@ -7,10 +7,9 @@ namespace BudgetPro.Models
     public class BudgetItem
     {
         public BudgetItem() { }
-
+        public int Id { get; set; }
         public string Description { get; set; }
         public int CategoryId { get; set; }
-        public int HouseholdId { get; set; }
         public decimal Amount { get; set; }
         public int Frequency { get; set; }
 
@@ -32,7 +31,7 @@ namespace BudgetPro.Models
     }
     public class TransModel
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public int AccountId { get; set; }
         public string Amount { get; set; }
         public string AbsAmount { get; set; }
@@ -54,5 +53,11 @@ namespace BudgetPro.Models
         public int? HouseholdId { get; set; }
         public string PhoneNumber { get; set; }
         public string UserName { get; set; }
+    }
+    public class CategoryModel
+    {
+        public int Id { get; set; }
+        public int HouseholdId { get; set; }
+        public string Name { get; set; }
     }
 }

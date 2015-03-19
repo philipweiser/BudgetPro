@@ -12,9 +12,12 @@ namespace BudgetPro.Models.Database
         // user defined procs
 
         // auto procs
-        Task<int> InsertTransactionAsync(int HouseholdId, string Name, decimal balance);
-        Task<bool> GetTransactionsAsync(int HouseholdId);
-        Task<bool> DeleteTransactionAsync(int id);
-        Task<int> UpdateTransactionAsync(int HouseholdId, string Name, string description, decimal balance, decimal reconciledBalance, int updaterId, DateTimeOffset updated);
+        Task<int> InsertTransactionAsync(TransModel element);
+        Task<List<TransModel>> FindTransactionsAsync(int HouseholdId);
+        Task DeleteTransactionAsync(int Id);
+        Task<int> UpdateTransactionAsync(TransModel element);
+
+        [Sql(Schema = "Security")]
+        Task<UserModel> SelectUserAsync(int Id);
     }
 }

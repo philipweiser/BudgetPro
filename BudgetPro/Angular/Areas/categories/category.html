@@ -1,0 +1,12 @@
+﻿<div ng-controller="categoryController">
+    This is the budget
+    {{budgetItem.Id}}
+    <input type="text" placeholder="Id" ng-model="category.Id" />
+    <input type="text" placeholder="Name" ng-model="category.Name" />
+    <div ui-grid="{ data: categories }" id="grid1" class="myGrid">
+    </div>
+    <input type="button" ng-click="getCategories()" value="Get Categories" />
+    <input type="button" ng-click="createCategory()" value="Create Category" />
+    <input type="button" ng-click="deleteCategory()" value="Delete Category" />
+    <input type="button" ng-click="updateCategory()" value="Update Category" />
+</div>

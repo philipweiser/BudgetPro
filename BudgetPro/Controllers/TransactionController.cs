@@ -14,24 +14,44 @@ using System.Data.SqlClient;
 using System.Data.Common;
 namespace BudgetPro.Controllers
 {
-    public class TransactionController : ApiController, ITransactionDataAccess
+    [RoutePrefix("api/Transaction")]
+    public class TransactionController : ApiController
     {
         private ITransactionDataAccess i = ConfigurationManager.ConnectionStrings["DefaultConnection"].As<ITransactionDataAccess>();
-        public async Task<int> InsertTransactionAsync(int HouseholdId, string Name, decimal balance)
+        [HttpPost]
+        [Route("")]
+        public async Task<int> InsertTransactionAsync(TransModel foo)
         {
-            return await i.InsertTransactionAsync(HouseholdId, Name, balance);
+            var user = await i.SelectUserAsync(User.Identity.GetUserId<int>());
+
+            foo.UpdatedByUserId = user.Id;
+            foo.Date = DateTimeOffset.Now;
+            return await i.InsertTransactionAsync(foo);
         }
-        public async Task<bool> GetTransactionsAsync(int HouseholdId)
+        [HttpGet]
+        [Route("")]
+        public async Task<List<TransModel>> GetTransactionsAsync()
         {
-            return await i.GetTransactionsAsync(HouseholdId);
+            var user = await i.SelectUserAsync(User.Identity.GetUserId<int>());
+
+            if (user.HouseholdId == null)
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            
+            return await i.FindTransactionsAsync(user.HouseholdId.Value);
         }
-        public async Task<bool> DeleteTransactionAsync(int id) 
+        [HttpPost]
+        [Route("")]
+        public Task DeleteTransactionAsync(int id) 
         {
-            return await i.DeleteTransactionAsync(id);
+            return i.DeleteTransactionAsync(id);
         }
-        public async Task<int> UpdateTransactionAsync(int HouseholdId, string Name, string description, decimal balance, decimal reconciledBalance, int updaterId, DateTimeOffset updated)
+        [HttpPost]
+        [Route("")]
+        public async Task<int> UpdateTransactionAsync(TransModel foo)
         {
-            return await i.UpdateTransactionAsync(HouseholdId, Name, description, balance, reconciledBalance, updaterId, DateTimeOffset.Now);
+            foo.UpdatedByUserId = User.Identity.GetUserId<int>();
+            foo.Updated = DateTimeOffset.Now;
+            return await i.UpdateTransactionAsync(foo);
         }
     }
 }

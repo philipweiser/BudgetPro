@@ -2,19 +2,18 @@
 using System.Threading.Tasks;
 using BudgetPro.Models;
 using Insight.Database;
-
 namespace BudgetPro.Models.Database
 {
     [Sql(Schema = "dbo")]
-    public interface IBudgetDataAccess
+    public interface ICategoryDataAccess
     {
         // user defined procs
-        Task<IEnumerable<BudgetItem>> FindBudgetItems(int HouseholdId);
+        Task<int> InsertCategoryAsync(CategoryModel entry);
 
         // auto procs
-        Task DeleteBudgetItemAsync(int id);
-        Task<int> InsertBudgetItemAsync(BudgetItem foo);
-        Task<int> UpdateBudgetItemAsync(BudgetItem foo);
+        Task<List<CategoryModel>> FindCategoriesAsync(int HouseholdId);
+        Task DeleteCategoryAsync(int Id);
+        Task<int> UpdateCategoryAsync(CategoryModel entry);
 
         [Sql(Schema = "Security")]
         Task<UserModel> SelectUserAsync(int Id);

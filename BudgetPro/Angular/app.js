@@ -26,9 +26,9 @@
                 url: '/Household',
                 templateUrl: '/Angular/Areas/household/housemgmt.html',
             })
-            .state('transmgmt', {
+            .state('transaction', {
                 url: '/Transactions',
-                templateUrl: '/Angular/Areas/transaction/transmgmt.html',
+                templateUrl: '/Angular/Areas/transaction/transaction.html',
             })
             .state('userprofile', {
                 url: '/Profile',
@@ -37,6 +37,10 @@
             .state('budget', {
                 url: '/Budget',
                 templateUrl: '/Angular/Areas/budget/budget.html',
+            })
+            .state('category', {
+                url: '/Categories',
+                templateUrl: '/Angular/Areas/categories/category.html',
             })
         $httpProvider.defaults.withCredentials = true;
         $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';

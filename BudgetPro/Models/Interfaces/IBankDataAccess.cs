@@ -8,7 +8,7 @@ namespace BudgetPro.Models.Database
     public interface IBankDataAccess
     {
         // user defined procs
-        Task InsertAccountAsync(BankModel entry);
+        Task<int> InsertAccountAsync(BankModel entry);
 
         // auto procs
         Task<List<BankModel>> FindAccountsAsync(int HouseholdId);

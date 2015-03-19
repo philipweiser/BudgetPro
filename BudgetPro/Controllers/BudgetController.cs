@@ -9,30 +9,36 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Insight.Database;
+using Microsoft.AspNet.Identity;
 
 namespace BudgetPro.Controllers
 {
     [RoutePrefix("api/Budget")]
-    public class BudgetController : ApiController, IBudgetDataAccess
+    public class BudgetController : ApiController
     {
         private IBudgetDataAccess i = ConfigurationManager.ConnectionStrings["DefaultConnection"].As<IBudgetDataAccess>();
-        [HttpPost]
+        
+        [HttpGet]
         [Route("GetBudget")]
-        public async Task<IEnumerable<BudgetItem>> GetBudgetItemsForHousehold([FromBody]int HouseholdId)
+        public async Task<IEnumerable<BudgetItem>> GetBudgetItemsForHousehold()
         {
-            return await i.GetBudgetItemsForHousehold(Convert.ToInt32(User.Identity.GetHouseholdId()));
+            var user = await i.SelectUserAsync(User.Identity.GetUserId<int>());
+
+            if (user.HouseholdId == null)
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            return await i.FindBudgetItems(user.HouseholdId.Value);
         }
         [HttpPost]
         [Route("Delete")]
-        public async Task<bool> DeleteBudgetItemAsync(int id)
+        public Task DeleteBudgetItemAsync([FromBody]int id)
         {
-            return await i.DeleteBudgetItemAsync(id);
+            return i.DeleteBudgetItemAsync(id);
         }
         [HttpPost]
         [Route("Create")]
-        public async Task<bool> CreateBudgetItemAsync(BudgetItem foo)
+        public async Task<int> CreateBudgetItemAsync(BudgetItem foo)
         {
-            return await i.CreateBudgetItemAsync(foo);
+            return await i.InsertBudgetItemAsync(foo);
         }
         [HttpPost]
         [Route("Update")]
