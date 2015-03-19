@@ -19,7 +19,7 @@ namespace BudgetPro.Controllers
     {
         private ITransactionDataAccess i = ConfigurationManager.ConnectionStrings["DefaultConnection"].As<ITransactionDataAccess>();
         [HttpPost]
-        [Route("")]
+        [Route("Create")]
         public async Task<int> InsertTransactionAsync(TransModel foo)
         {
             var user = await i.SelectUserAsync(User.Identity.GetUserId<int>());
@@ -29,7 +29,7 @@ namespace BudgetPro.Controllers
             return await i.InsertTransactionAsync(foo);
         }
         [HttpGet]
-        [Route("")]
+        [Route("GetTransactions")]
         public async Task<List<TransModel>> GetTransactionsAsync()
         {
             var user = await i.SelectUserAsync(User.Identity.GetUserId<int>());
@@ -40,13 +40,13 @@ namespace BudgetPro.Controllers
             return await i.FindTransactionsAsync(user.HouseholdId.Value);
         }
         [HttpPost]
-        [Route("")]
-        public Task DeleteTransactionAsync(int id) 
+        [Route("Delete")]
+        public Task DeleteTransactionAsync([FromBody]int id) 
         {
             return i.DeleteTransactionAsync(id);
         }
         [HttpPost]
-        [Route("")]
+        [Route("Update")]
         public async Task<int> UpdateTransactionAsync(TransModel foo)
         {
             foo.UpdatedByUserId = User.Identity.GetUserId<int>();

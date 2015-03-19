@@ -19,8 +19,8 @@
                 return response.data;
             });
     };
-    factory.updateTransaction = function () {
-        return $http.post('api/Transaction/Update')
+    factory.updateTransaction = function (foo) {
+        return $http.post('api/Transaction/Update', foo)
             .then(function (response) {
                 return response.data;
             });

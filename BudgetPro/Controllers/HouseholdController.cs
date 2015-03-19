@@ -36,7 +36,6 @@ namespace BudgetPro.Controllers
             var id = User.Identity.GetUserId<int>();
             i.DeleteHouseholdAsync(id);
         }
-
         [HttpPost]
         [Route("Create")]
         public async Task<int?> InsertHouseholdAsync([FromBody]string name)
