@@ -3,11 +3,7 @@
         // Path: /
         .controller('accmgmtController', ['$scope', '$state', '$stateParams', 'bankSvcs', function ($scope, $state, $stateParams, bankSvcs) {
             $scope.message = '';
-            $scope.newBank = {
-                Name :  '',
-                Balance :  '',
-                ReconciledBalance : '',
-            };
+            $scope.newBankName= '';
             $scope.delBank = '';
             $scope.banks = [];
             $scope.editBank = {
@@ -16,8 +12,18 @@
                 Balance: '',
                 ReconciledBalance: '',
             };
+            $scope.gridOptions = {
+                enableFiltering: true,
+                data: 'banks',
+                columnDefs: [
+                    { name: ' ', width: '80', field: 'Id', cellTemplate: '<div class="ui-grid-cell-contents" title="Edit Account"><i class="icon-pencil" />Edit</div>' },
+                    { name: 'Name' },
+                    { name: 'Balance' },
+                    { name: 'ReconciledBalance' }
+                ]
+            };
             $scope.createBank = function () {
-                bankSvcs.createBank($scope.newBank).then(function (response) {
+                bankSvcs.createBank($scope.newBankName).then(function (response) {
                 });
             }
             $scope.deleteBank = function () {

@@ -2,7 +2,7 @@
     var factory = {};
 
     factory.createBank = function (newBank) {
-        return $http.post('api/Bank/Create', newBank);
+        return $http.post('api/Bank/Create', '"' + newBank + '"');
     };
     factory.deleteBank = function (delBank) {
         return $http.post('api/Bank/Delete/', delBank);

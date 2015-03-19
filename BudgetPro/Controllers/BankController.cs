@@ -22,8 +22,12 @@ namespace BudgetPro.Controllers
         private IBankDataAccess i = ConfigurationManager.ConnectionStrings["DefaultConnection"].As<IBankDataAccess>();
         [HttpPost]
         [Route("Create")]
-        public async Task<int> CreateBankAsync(BankModel foo)
+        public async Task<int> CreateBankAsync([FromBody]string Name)
         {
+            BankModel foo = new BankModel();
+            foo.Name = Name;
+            foo.Balance = "0";
+            foo.ReconciledBalance = "0";
             var user = await i.SelectUserAsync(User.Identity.GetUserId<int>());
             
             if(user.HouseholdId == null)

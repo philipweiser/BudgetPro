@@ -1,5 +1,5 @@
-﻿angular.module('app', ['ui.router', 'ui.bootstrap', 'LocalStorageModule', 'ui.grid'])
-    .config(['$stateProvider', '$locationProvider', '$urlRouterProvider', '$httpProvider', function ($stateProvider, $locationProvider, $urlRouterProvider, $httpProvider) {
+﻿angular.module('app', ['ui.router', 'ui.bootstrap', 'LocalStorageModule', 'ui.grid', 'ngAnimate'])
+    .config(['$stateProvider', '$locationProvider', '$urlRouterProvider', '$httpProvider', function ($stateProvider, $locationProvider, $urlRouterProvider, $httpProvider, ngAnimate) {
         // UI States, URL Routing & Mapping. For more info see: https://github.com/angular-ui/ui-router
         // ------------------------------------------------------------------------------------------------------------
 

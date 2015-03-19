@@ -1,29 +1,5 @@
 ﻿<div ng-controller="accmgmtController">
     {{message}}
-    <!-- Form Name -->
-    <h1>Add New Account</h1>
-    <div class="control-group">
-        <label class="control-label" for="newName">Name</label>
-        <div class="controls">
-            <input id="newName" name="newName" ng-model="newBank.Name" type="text" placeholder="Account Name" class="input-medium">
-            
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label"  for="textinput">Balance</label>
-        <div class="controls">
-            <input id="textinput" ng-model="newBank.Balance" name="textinput" type="text" placeholder="Current Balance" class="input-medium">
-            
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label"  for="textinput">Reconciled Balance</label>
-        <div class="controls">
-            <input id="textinput" ng-model="newBank.ReconciledBalance" name="textinput" type="text" placeholder="Reconciled Balance" class="input-medium">
-            
-        </div>
-    </div>
-    <input type="button" value="Create" ng-click="createBank()" />
 
     Delete Account
     <input type="text" ng-model="delBank" placeholder="Account Id" />
@@ -31,7 +7,7 @@
 
     GetBanks
     <input type="button" value="Show Accounts" ng-click="getBanks()" />
-    <div ui-grid="{ data: banks }" id="grid1" class="myGrid">
+    <div ui-grid="gridOptions" id="grid1" class="myGrid">
     </div>
 
     <h1>Edit Account</h1>
@@ -45,22 +21,50 @@
         <label class="control-label" for="newName">Name</label>
         <div class="controls">
             <input id="newName" name="newName" ng-model="editBank.Name" type="text" placeholder="Account Name" class="input-medium">
-            
+
         </div>
     </div>
     <div class="control-group">
         <label class="control-label" for="textinput">Balance</label>
         <div class="controls">
             <input id="textinput" name="textinput" ng-model="editBank.Balance" type="text" placeholder="Current Balance" class="input-medium">
-            
+
         </div>
     </div>
     <div class="control-group">
         <label class="control-label" for="textinput">Reconciled Balance</label>
         <div class="controls">
             <input id="textinput" name="textinput" ng-model="editBank.ReconciledBalance" type="text" placeholder="Reconciled Balance" class="input-medium">
-            
+
         </div>
     </div>
     <input type="button" value="Submit Changes" ng-click="editBankSubmit()" />
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 column">
+                <div class="page-header">
+                    <h1>
+                        Accounts
+                    </h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 column">
+                <div class="control-group">
+                    <label class="control-label" for="newName">Name</label>
+                    <div class="controls">
+                        <input id="newName" name="newName" ng-model="newBankName" type="text" placeholder="Account Name" class="input-medium">
+                    </div>
+                </div>
+                <input type="button" value="Create" ng-click="createBank()" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 column">
+            </div>
+        </div>
+    </div>
 </div>
