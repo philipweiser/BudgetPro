@@ -3,7 +3,7 @@
         // Path: /
         .controller('accmgmtController', ['$scope', '$state', '$stateParams', 'bankSvcs', function ($scope, $state, $stateParams, bankSvcs) {
             $scope.message = '';
-            $scope.newBankName= '';
+            $scope.newBankName = '';
             $scope.delBank = '';
             $scope.banks = [];
             $scope.editBank = {
@@ -13,10 +13,22 @@
                 ReconciledBalance: '',
             };
             $scope.gridOptions = {
-                enableFiltering: true,
                 data: 'banks',
                 columnDefs: [
-                    { name: ' ', width: '80', field: 'Id', cellTemplate: '<div class="ui-grid-cell-contents" title="Edit Account"><i class="icon-pencil" />Edit</div>' },
+                    {
+                        name: '',
+                        width: '80', field: 'Id',
+                        cellTemplate: '<div class="ui-grid-cell-contents" title="Edit Account">'+
+                            '<input type="button"  ng-click="grid.appScope.whichEdit(row.entity)" class="btn" value="Edit" /></div>',
+                        enableSorting: false
+                    },
+                    {
+                        name: ' ',
+                        width: '80', field: 'Id',
+                        cellTemplate: '<div class="ui-grid-cell-contents" title="Delete Account">' +
+                               '<input type="button"  ng-click="grid.appScope.deleteBank(row.entity.Id)" class="btn" value="Delete" /></div>',
+                        enableSorting: false
+                    },
                     { name: 'Name' },
                     { name: 'Balance' },
                     { name: 'ReconciledBalance' }
@@ -26,8 +38,8 @@
                 bankSvcs.createBank($scope.newBankName).then(function (response) {
                 });
             }
-            $scope.deleteBank = function () {
-                bankSvcs.deleteBank($scope.delBank).then(function (response) {
+            $scope.deleteBank = function (id) {
+                bankSvcs.deleteBank(id).then(function (response) {
                 });
             }
             $scope.getBanks = function () {
@@ -38,6 +50,9 @@
             $scope.editBankSubmit = function () {
                 bankSvcs.updateBank($scope.editBank).then(function (response) {
                 });
+            }
+            $scope.whichEdit = function (entity) {
+                $scope.editBank = entity;
             }
         }])
 })();

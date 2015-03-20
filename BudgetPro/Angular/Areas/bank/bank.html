@@ -1,46 +1,5 @@
 ﻿<div ng-controller="accmgmtController">
     {{message}}
-
-    Delete Account
-    <input type="text" ng-model="delBank" placeholder="Account Id" />
-    <input type="button" value="Delete" ng-click="deleteBank()" />
-
-    GetBanks
-    <input type="button" value="Show Accounts" ng-click="getBanks()" />
-    <div ui-grid="gridOptions" id="grid1" class="myGrid">
-    </div>
-
-    <h1>Edit Account</h1>
-    <div class="control-group">
-        <label class="control-label" for="editBank.Id">Account Id</label>
-        <div class="controls">
-            <input id="editBank.Id" name="editBank.Id" ng-model="editBank.Id" type="text" placeholder="Account Id" class="input-medium">
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label" for="newName">Name</label>
-        <div class="controls">
-            <input id="newName" name="newName" ng-model="editBank.Name" type="text" placeholder="Account Name" class="input-medium">
-
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label" for="textinput">Balance</label>
-        <div class="controls">
-            <input id="textinput" name="textinput" ng-model="editBank.Balance" type="text" placeholder="Current Balance" class="input-medium">
-
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label" for="textinput">Reconciled Balance</label>
-        <div class="controls">
-            <input id="textinput" name="textinput" ng-model="editBank.ReconciledBalance" type="text" placeholder="Reconciled Balance" class="input-medium">
-
-        </div>
-    </div>
-    <input type="button" value="Submit Changes" ng-click="editBankSubmit()" />
-
-
     <div class="container">
         <div class="row">
             <div class="col-md-12 column">
@@ -64,6 +23,20 @@
         </div>
         <div class="row">
             <div class="col-md-12 column">
+                <input type="button" value="Show Accounts" ng-click="getBanks()" />
+                <div ui-grid="gridOptions" id="grid1" class="myGrid">
+                </div>
+
+                <h1>Edit Account</h1>
+                <div class="control-group">
+                    <label class="control-label" for="newName">Name</label>
+                    <div class="controls">
+                        <input id="newName" name="newName" ng-model="editBank.Name" type="text" placeholder="Account Name" class="input-medium">
+
+                    </div>
+                </div>
+
+                <input type="button" value="Submit Changes" ng-click="editBankSubmit()" />
             </div>
         </div>
     </div>
