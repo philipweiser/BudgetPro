@@ -266,6 +266,8 @@
     <Content Include="Angular\Areas\categories\category.html" />
     <Content Include="Angular\Areas\categories\categoryController.js" />
     <Content Include="Angular\Areas\dashboard\dashboardController.js" />
+    <Content Include="Content\css\layout2.css" />
+    <Content Include="Index.html" />
     <Content Include="Angular\Areas\household\housemgmtController.js" />
     <Content Include="Angular\Areas\accounts\LoginController.js" />
     <Content Include="Angular\Areas\accounts\registerController.js" />
@@ -307,7 +309,7 @@
     <Content Include="Content\bs-admin-bcore\template\assets\css\main.css" />
     <Content Include="Content\bs-admin-bcore\template\assets\css\main.min.css" />
     <Content Include="Content\bs-admin-bcore\template\assets\css\Markdown.Editor.hack.css" />
-    <Content Include="Content\bs-admin-bcore\template\assets\css\MoneAdmin.css" />
+    <Content Include="Content\css\MoneAdmin.css" />
     <Content Include="Content\bs-admin-bcore\template\assets\css\Offline.css" />
     <Content Include="Content\bs-admin-bcore\template\assets\css\style.css" />
     <Content Include="Content\bs-admin-bcore\template\assets\css\theme.css" />
@@ -1919,7 +1921,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Global.asax" />
-    <Content Include="Index.html" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-aria.js" />
