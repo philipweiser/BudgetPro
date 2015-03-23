@@ -54,13 +54,13 @@
     <script src="Angular/Areas/accounts/userprofileController.js"></script>
     <script src="Angular/Areas/accounts/userSvcs.js"></script>
     <!--Bank-->
-    <script src="Angular/Areas/bank/bankSvcs.js"></script>
+    <script src="Angular/global/services/bankSvcs.js"></script>
     <script src="Angular/Areas/bank/accmgmtController.js"></script>
     <!--Budget-->
     <script src="Angular/Areas/budget/budgetItemSvcs.js"></script>
     <script src="Angular/Areas/budget/budgetController.js"></script>
     <!--Categories-->
-    <script src="Angular/Areas/categories/categorySvcs.js"></script>
+    <script src="Angular/global/services/categorySvcs.js"></script>
     <script src="Angular/Areas/categories/categoryController.js"></script>
     <!--Household-->
     <script src="Angular/Areas/household/houseSvcs.js"></script>
@@ -365,14 +365,14 @@
             </div>-->
 
             <ul id="menu">
-                <li><a ui-sref="register"><i class="icon-angle-right"></i>register</a></li>
-                <li><a ui-sref="login"><i class="icon-angle-right"></i>login</a></li>
-                <li><a ui-sref="bank"><i class="icon-angle-right"></i>bankmgmt</a></li>
-                <li><a ui-sref="transaction"><i class="icon-angle-right"></i>transaction</a></li>
-                <li><a ui-sref="housemgmt"><i class="icon-angle-right"></i>housemgmt</a></li>
-                <li><a ui-sref="userprofile"><i class="icon-angle-right"></i>userprofile</a></li>
-                <li><a ui-sref="budget"><i class="icon-angle-right"></i>budget</a></li>
-                <li><a ui-sref="category"><i class="icon-angle-right"></i>category</a></li>
+                <li><a ui-sref="register">Register</a></li>
+                <li><a ui-sref="login">Login</a></li>
+                <li><a ui-sref="bank">Accounts</a></li>
+                <li><a ui-sref="transaction">Transactions</a></li>
+                <li><a ui-sref="housemgmt">Household</a></li>
+                <!--<li><a ui-sref="userprofile">Profile</a></li>-->
+                <li><a ui-sref="budget">Budgets</a></li>
+                <li><a ui-sref="category">Categories</a></li>
             </ul>
 
         </div>
@@ -381,12 +381,12 @@
         <div id="content">
 
             <div class="inner" style="min-height: 700px;" ui-view>
-                <div class="row">
+                <!--<div class="row">
                     <div class="col-lg-12">
                         <h1> Admin Dashboard </h1>
                     </div>
-                </div>
-                <hr />
+                </div>-->
+                <!--<hr />-->
                 <!--BLOCK SECTION -->
                 <!--<div class="row">
                     <div class="col-lg-12">
@@ -432,7 +432,7 @@
 
                 </div>-->
                 <!--END BLOCK SECTION -->
-                <hr />
+                <!--<hr />-->
                 <!-- CHART & CHAT  SECTION -->
                 <!--<div class="row">
                             <div class="col-lg-8">

@@ -6,6 +6,13 @@
         $scope.theHouse = '';
         $scope.houseData = '';
         $scope.message = '';
+        $scope.gridOptions = {
+            data: 'houseData',
+            columnDefs: [
+                { name: 'Name' },
+                { name: 'Email' }
+            ]
+        };
 
         $scope.inviteToHousehold = function () {
             if ($scope.inviteEmail == null || $scope.inviteEmail == "") {

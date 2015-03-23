@@ -26,8 +26,8 @@ namespace BudgetPro.Controllers
         {
             BankModel foo = new BankModel();
             foo.Name = Name;
-            foo.Balance = "0";
-            foo.ReconciledBalance = "0";
+            foo.Balance = 0;
+            foo.ReconciledBalance = 0;
             var user = await i.SelectUserAsync(User.Identity.GetUserId<int>());
             
             if(user.HouseholdId == null)

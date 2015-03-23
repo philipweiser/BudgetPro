@@ -5,7 +5,6 @@
             Id : '',
             Name : '',
             Email: '',
-            PhoneNumber: '',
             Household: '',
             UserName: ''
         };

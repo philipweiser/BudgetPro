@@ -2,7 +2,7 @@
     // Path: /
     .controller('budgetController', ['$scope', '$state', '$stateParams', 'budgetItemSvcs', function ($scope, $state, $stateParams, budgetItemSvcs) {
         $scope.budgetItem = {
-            Id: '5',
+            Id: '',
             Description: '',
             CategoryId: '',
             Amount: '',

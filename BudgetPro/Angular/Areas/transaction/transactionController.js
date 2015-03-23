@@ -1,20 +1,26 @@
 ﻿angular.module('app')
     // Path: /
-    .controller('transactionController', ['$scope', '$state', '$stateParams', 'transactionSvcs', function ($scope, $state, $stateParams, transactionSvcs) {
+    .controller('transactionController', ['$scope', '$state', '$stateParams', 'transactionSvcs', 'categorySvcs', 'accountSvcs', function ($scope, $state, $stateParams, transactionSvcs, categorySvcs, accountSvcs) {
         $scope.transaction = {
             Id: '',
-            AccountId: '',
-            Amount: '',
-            AbsAmount: '',
-            ReconciledAmount: '',
-            AbsReconciledAmount: '',
+            AccountName: '',
+            Amount: 0,
+            ReconciledAmount: 0,
             Date: '',
             Description: '',
-            Updated: '',
-            UpdatedByUserId: '',
             CategoryId: '',
         };
-        $scope.transactions = '';
+        $scope.categories = $scope.getCategories();
+        $scope.accounts = $scope.getBanks();
+        $scope.getAccounts = function () {
+            transactionSvcs.getAccounts()
+                .then(function (response) {
+                    $scope.accounts = [];
+                    for (i = 0; i < response.length; i++) {
+                        $scope.accounts.push(response[i].Name);
+                    }
+                });
+        };
         $scope.getTransactions = function () {
             transactionSvcs.getTransactions()
                 .then(function (response) {
@@ -22,7 +28,7 @@
                 });
         };
         $scope.createTransaction = function () {
-            transactionSvcs.createTransaction($scope.transaction)
+            transactionSvcs.createTransaction($scope.transaction, $scope.Name)
                 .then(function (response) {
                     console.log(response);
                 });
@@ -39,4 +45,5 @@
                     console.log(response);
                 });
         };
+        $scope.transactions = $scope.getTransactions();
     }])

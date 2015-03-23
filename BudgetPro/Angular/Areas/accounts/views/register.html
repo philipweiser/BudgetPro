@@ -1,69 +1,74 @@
 ﻿<div ng-controller="registerController">
-    <form class="form-horizontal">
-        <fieldset>
+    <div class="row">
+        <div class="col-xs-12">
 
-            <!-- Form Name -->
-            <legend>Register</legend>
-            <h4>{{message}}</h4>
-            <div class="form-group no-margin">
-                <label for="name">Full Name</label>
+            <form class="form-horizontal">
+                <fieldset>
+                    <!-- Form Name -->
+                    <h2 style="text-align:center">{{message}}</h2>
+                    <hr />
+                    <div class="col-sm-6">
+                        <label for="name">Full Name</label>
 
-                <div class="input-group input-group-lg">
-                    <span class="input-group-addon">
-                        <i class="fa fa-user"></i>
-                    </span>
-                    <input id="name" type="text" data-ng-model="registerData.Name" class="form-control input-lg"
-                           placeholder="Name">
-                </div>
+                        <div class="input-group input-group-md">
+                            <span class="input-group-addon">
+                                <i class="fa fa-user"></i>
+                            </span>
+                            <input id="name" type="text" data-ng-model="registerData.Name" class="form-control input-lg"
+                                   placeholder="Name">
+                        </div>
 
-            </div>
+                        <label for="username">Username</label>
 
-            <div class="form-group no-margin">
-                <label for="username">Username</label>
+                        <div class="input-group input-group-md">
+                            <span class="input-group-addon">
+                                <i class="fa fa-user"></i>
+                            </span>
+                            <input id="username" type="text" data-ng-model="registerData.UserName" class="form-control input-lg"
+                                   placeholder="Username">
+                        </div>
 
-                <div class="input-group input-group-lg">
-                    <span class="input-group-addon">
-                        <i class="fa fa-user"></i>
-                    </span>
-                    <input id="username" type="text" data-ng-model="registerData.UserName" class="form-control input-lg"
-                           placeholder="Username">
-                </div>
+                        <!-- Text input-->
 
-            </div>
-            <!-- Text input-->
-            <div class="control-group">
-                <label class="control-label" for="Email">Email Address</label>
-                <div class="controls">
-                    <input ng-model="registerData.Email" id="Email" name="Email" type="text" placeholder="name@example.com" class="input-large" required="">
+                        <label for="Email">Email Address</label>
 
-                </div>
-            </div>
+                        <div class="input-group input-group-md">
+                            <span class="input-group-addon">
+                                <i class="fa fa-user"></i>
+                            </span>
+                            <input ng-model="registerData.Email" id="Email" name="Email" type="text" placeholder="name@example.com" class="form-control input-lg" required="">
+                        </div>
+                    </div>
 
-            <!-- Text input-->
-            <div class="control-group">
-                <label class="control-label" for="Password">Password</label>
-                <div class="controls">
-                    <input ng-model="registerData.Password" id="Password" name="Password" type="password" placeholder="********" class="input-small" required="">
-                </div>
-            </div>
 
-            <!-- Text input-->
-            <div class="control-group">
-                <label class="control-label" for="ConfirmPassword">Confirm Password</label>
-                <div class="controls">
-                    <input ng-model="registerData.ConfirmPassword" id="ConfirmPassword" name="ConfirmPassword" type="password" placeholder="********" class="input-small" required="">
+                    <div class="col-sm-6">
+                        <!-- Text input-->
+                        <label for="Password">Password</label>
 
-                </div>
-            </div>
+                        <div class="input-group input-group-md">
+                            <span class="input-group-addon">
+                                <i class="fa fa-user"></i>
+                            </span>
+                            <input ng-model="registerData.Password" id="Password" name="Password" type="password" placeholder="********" class="form-control input-lg" required="">
+                        </div>
 
-            <!-- Button -->
-            <div class="control-group">
-                <label class="control-label" for="singlebutton"></label>
-                <div class="controls">
-                    <button ng-click="register()" id="singlebutton" name="singlebutton" class="btn btn-primary">Register</button>
-                </div>
-            </div>
+                        <!-- Text input-->
+                        <label for="ConfirmPassword">Confirm Password</label>
 
-        </fieldset>
-    </form>
+                        <div class="input-group input-group-md">
+                            <span class="input-group-addon">
+                                <i class="fa fa-user"></i>
+                            </span>
+                            <input ng-model="registerData.ConfirmPassword" id="ConfirmPassword" name="ConfirmPassword" type="password" placeholder="********" class="form-control input-lg" required="">
+                        </div>
+
+                        <!-- Button -->
+                        <div class="input-group input-group-md" style="margin-top:20px">
+                            <button ng-click="register()" id="singlebutton" name="singlebutton" class="btn btn-primary btn-lg">Register</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
 </div>

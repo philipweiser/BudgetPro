@@ -30,18 +30,18 @@
                 url: '/Transactions',
                 templateUrl: '/Angular/Areas/transaction/transaction.html',
             })
-            .state('userprofile', {
-                url: '/Profile',
-                templateUrl: '/Angular/Areas/accounts/views/userprofile.html',
-            })
+            //.state('userprofile', {
+            //    url: '/Profile',
+            //    templateUrl: '/Angular/Areas/accounts/views/userprofile.html',
+            //})
             .state('budget', {
                 url: '/Budget',
                 templateUrl: '/Angular/Areas/budget/budget.html',
             })
-            .state('category', {
-                url: '/Categories',
-                templateUrl: '/Angular/Areas/categories/category.html',
-            })
+            //.state('category', {
+            //    url: '/Categories',
+            //    templateUrl: '/Angular/Areas/categories/category.html',
+            //})
         $httpProvider.defaults.withCredentials = true;
         $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
 

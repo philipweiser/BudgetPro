@@ -1,16 +1,14 @@
 ﻿<div ng-controller="transactionController">
     <input type="text" placeholder="Id" ng-model="transaction.Id"/>
-    <input type="text" placeholder="AccountId" ng-model="transaction.AccountId" />
+    <select ng-options="Name for Name in accounts" ng-model="Name" />
     <input type="text" placeholder="Description" ng-model="transaction.Description" />
     <input type="text" placeholder="CategoryId" ng-model="transaction.CategoryId" />
     <input type="text" placeholder="Amount" ng-model="transaction.Amount" />
-    <input type="text" placeholder="AbsAmount" ng-model="transaction.AbsAmount" />
     <input type="text" placeholder="ReconciledAmount" ng-model="transaction.ReconciledAmount" />
-    <input type="text" placeholder="AbsReconciledAmount" ng-model="transaction.AbsReconciledAmount" />
     <input type="text" placeholder="Frequency" ng-model="transaction.Frequency" />
     
 
-    <input type="button" ng-click="getTransactions()" value="Get transaction" />
+    <input type="button" ng-click="getTransactions(); getAccounts()" value="Get transaction" />
     <input type="button" ng-click="createTransaction()" value="Create transaction" />
     <input type="button" ng-click="deleteTransaction()" value="Delete transaction" />
     <input type="button" ng-click="updateTransaction()" value="Update transaction" />

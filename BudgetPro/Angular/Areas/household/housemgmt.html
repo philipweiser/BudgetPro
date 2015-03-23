@@ -1,19 +1,32 @@
 ﻿<div ng-controller="housemgmtController">
-housemgmt
     {{message}}
-    Display Members
-        memberDisplay
-        <div ui-grid="{ data: houseData }" id="grid1" class="myGrid">
+    Your Household
+    <div ui-grid=gridOptions id="grid1" class="myGrid">
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <label for="name">Invite User to Household</label>
+            <div class="input-group input-group-md">
+                <span class="input-group-addon">
+                    <i class="fa fa-user"></i>
+                </span>
+
+                <input type="email" class="form-control input-lg" ng-model="inviteEmail" placeholder="Invite User to Household" />
+            </div>
+            <input type="button" class="form-control btn-primary btn" value="Invite" ng-click="inviteToHousehold()" />
         </div>
-    Invite box
-        <input type="email" ng-model="inviteEmail" placeholder="Invite User to Household" />
-        <input type="button" value="Invite" ng-click="inviteToHousehold()" />
-        {{inviteEmail}}
-    Leave Household
-        leaveHousehold
-        <input type="button" value="Leave Household" ng-click="leaveHousehold()" />
-    Create Household
-        <input type="text" ng-model="houseName" placeholder="New Household Name" />
-        <input type="button" value="Create" ng-click="createHousehold()" />
-        The houseName is {{theHouse}}
+        <div class="col-sm-6">
+            <label for="newHouseName">Create Household</label>
+            <div class="input-group input-group-md">
+                <span class="input-group-addon">
+                    <i class="fa fa-user"></i>
+                </span>
+                <input type="text" id="newHouseName" class="form-control input-lg" ng-model="houseName" placeholder="New Household Name" />
+            </div>
+            <input type="button" class="form-control btn-primary" value="Create" ng-click="createHousehold()" />
+        </div>
+        <div class="col-xs-6" style="margin-top:15px;">
+            <input type="button" class="form-control btn-danger" value="Leave Household" ng-click="leaveHousehold()" />
+        </div>
+    </div>
 </div>

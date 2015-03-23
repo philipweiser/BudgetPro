@@ -6,6 +6,10 @@
     font-family: 'ui-grid';
     src: url('../fonts/ui-grid.eot') format('embedded-opentype');
 }
+.input-group{
+    margin-bottom:5px;
+    margin-top:5px;
+}
 body {
     padding-top: 50px;
     padding-bottom: 20px;

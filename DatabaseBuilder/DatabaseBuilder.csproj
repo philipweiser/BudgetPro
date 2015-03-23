@@ -103,6 +103,15 @@
     <EmbeddedResource Include="SQL\DeleteCategory.sql" />
     <EmbeddedResource Include="SQL\DeleteAccount.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SQL\DeleteTransaction.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SQL\InsertTransaction.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SQL\FindAccountIdFromName.sql" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
