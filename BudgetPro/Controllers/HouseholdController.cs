@@ -41,9 +41,7 @@ namespace BudgetPro.Controllers
         public async Task<int?> InsertHouseholdAsync([FromBody]string name)
         {
             int userId = User.Identity.GetUserId<int>();
-            var user = new ApplicationUser();
-            user.Id = userId;
-            i.SelectUserAsync(userId);
+            var user = await i.SelectUserAsync(userId);
             if (user.HouseholdId == null)
             {
                 var foo = await i.InsertHouseholdAsync(name, userId);

@@ -23,7 +23,7 @@ namespace BudgetPro.Models.Database
         [Sql(Schema = "Security")]
         Task InsertUserClaimAsync(UserClaim claim);
         [Sql(Schema = "Security")]
-        void SelectUserAsync(int Id);
+        Task<ApplicationUser> SelectUserAsync(int Id);
     }
     //var x = new Household { Name = "Charly" };
     //db.InsertHouseholdAsync(x)

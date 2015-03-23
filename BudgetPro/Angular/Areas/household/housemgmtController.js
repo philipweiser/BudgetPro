@@ -18,7 +18,7 @@
             if ($scope.inviteEmail == null || $scope.inviteEmail == "") {
                 return $scope.message = "Not a valid email";
             }
-            houseSvcs.inviteToHousehold($scope.inviteEmail).then(function (response) {
+            houseSvcs.inviteToHousehold($scope.inviteEmail).then(function(response){
                 console.log(response);
             });
         };

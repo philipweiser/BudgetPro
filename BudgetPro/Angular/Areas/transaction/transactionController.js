@@ -1,6 +1,6 @@
 ﻿angular.module('app')
     // Path: /
-    .controller('transactionController', ['$scope', '$state', '$stateParams', 'transactionSvcs', 'categorySvcs', 'accountSvcs', function ($scope, $state, $stateParams, transactionSvcs, categorySvcs, accountSvcs) {
+    .controller('transactionController', ['$scope', '$state', '$stateParams', 'transactionSvcs', 'categorySvcs', 'bankSvcs', function ($scope, $state, $stateParams, transactionSvcs, categorySvcs, bankSvcs) {
         $scope.transaction = {
             Id: '',
             AccountName: '',
@@ -10,19 +10,22 @@
             Description: '',
             CategoryId: '',
         };
-        $scope.categories = $scope.getCategories();
-        $scope.accounts = $scope.getBanks();
-        $scope.getAccounts = function () {
-            transactionSvcs.getAccounts()
-                .then(function (response) {
-                    $scope.accounts = [];
-                    for (i = 0; i < response.length; i++) {
-                        $scope.accounts.push(response[i].Name);
-                    }
-                });
+        $scope.accounts = bankSvcs.getBanks();
+        $scope.columns = [
+                { name: 'AccountName' },
+                { name: 'Amount' },
+                { name: 'ReconciledAmount' },
+                { name: 'Date' },
+                { name: 'Description' },
+                { name: 'Date' },
+                { name: 'Category', field: 'Name'}
+        ];
+        $scope.gridOptions = {
+            data: 'transactions',
+            columnDefs: $scope.columns
         };
         $scope.getTransactions = function () {
-            transactionSvcs.getTransactions()
+            return transactionSvcs.getTransactions()
                 .then(function (response) {
                     $scope.transactions = response;
                 });
@@ -45,5 +48,11 @@
                     console.log(response);
                 });
         };
-        $scope.transactions = $scope.getTransactions();
+        $scope.transactions = [];
+        $scope.transactions.push($scope.getTransactions());
+        $scope.categories = categorySvcs.getCategories().then(function (response) {
+            console.log(response);
+            $scope.transactions.push($scope.categories);
+        });
+
     }])
