@@ -19,8 +19,8 @@
                 return response.data;
             });
     };
-    factory.updateBudgetItem = function () {
-        return $http.post('api/Budget/Update')
+    factory.updateBudgetItem = function (foo) {
+        return $http.post('api/Budget/Update', foo)
             .then(function (response) {
                 return response.data;
             });

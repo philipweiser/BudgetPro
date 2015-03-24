@@ -55,7 +55,7 @@
                     $scope.transactions = response;
                     for (i = 0; i < response.length; i++) {
                         if ($scope.categories.indexOf(response[i].CategoryName) < 0)
-                            $scope.categories.push(response[i].CategoryName);
+                            $scope.categories.push({CategoryId: response[i].CategoryId, CategoryName:response[i].CategoryName});
                     }
                 });
         };
@@ -81,6 +81,9 @@
                 $scope.transaction.ReconciledAmount = $scope.transaction.Amount;
             else
                 $scope.transaction.ReconciledAmount = 0;
+            if ($scope.categories[$scope.transaction.CategoryId] != $scope.transaction.CategoryName) {
+                $scope.transaction.CategoryId = 0;
+            }
             transactionSvcs.updateTransaction($scope.transaction)
                 .then(function (response) {
                     $scope.getTransactions();

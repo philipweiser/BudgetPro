@@ -24,7 +24,6 @@ namespace BudgetPro.Controllers
         {
             // get household Id
             var user = await i.SelectUserAsync(User.Identity.GetUserId<int>());
-            ICategoryDataAccess ic = ConfigurationManager.ConnectionStrings["DefaultConnection"].As<ICategoryDataAccess>();
             if (user.HouseholdId == null)
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
 
@@ -35,6 +34,7 @@ namespace BudgetPro.Controllers
             // create new category
             if (foo.CategoryId == 0)
             {
+                ICategoryDataAccess ic = ConfigurationManager.ConnectionStrings["DefaultConnection"].As<ICategoryDataAccess>();
                 foo.CategoryId = await ic.InsertCategoryAsync(entry);
             }
             foo.UpdatedByUserId = user.Id;
@@ -57,6 +57,22 @@ namespace BudgetPro.Controllers
         [Route("Update")]
         public async Task<int> UpdateTransactionAsync(TransModel foo)
         {
+
+            if (foo.CategoryId == 0)
+            {            
+                // get household Id
+                var user = await i.SelectUserAsync(User.Identity.GetUserId<int>());
+                if (user.HouseholdId == null)
+                    throw new HttpResponseException(HttpStatusCode.BadRequest);
+                // populate new categorymodel
+                CategoryModel entry = new CategoryModel();
+                entry.HouseholdId = user.HouseholdId.Value;
+                entry.Name = foo.CategoryName;
+                // create new category
+                ICategoryDataAccess ic = ConfigurationManager.ConnectionStrings["DefaultConnection"].As<ICategoryDataAccess>();
+                foo.CategoryId = await ic.InsertCategoryAsync(entry);
+            }
+
             foo.UpdatedByUserId = User.Identity.GetUserId<int>();
             foo.Updated = DateTimeOffset.Now;
             return await i.UpdateTransactionAsync(foo);

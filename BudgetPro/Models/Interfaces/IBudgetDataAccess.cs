@@ -9,7 +9,7 @@ namespace BudgetPro.Models.Database
     public interface IBudgetDataAccess
     {
         // user defined procs
-        Task<IEnumerable<BudgetItem>> FindBudgetItems(int HouseholdId);
+        Task<IEnumerable<BudgetItem>> GetBudgetItemsByHousehold(int HouseholdId);
 
         // auto procs
         Task DeleteBudgetItemAsync(int id);
