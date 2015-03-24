@@ -13,7 +13,7 @@ namespace BudgetPro.Models.Database
 
         // auto procs
         Task<int> InsertTransactionAsync(TransModel element);
-        Task<List<TransModel>> FindTransactionsAsync(int HouseholdId);
+        Task<List<TransModel>> GetTransactionsByAccountAsync(int AccountId);
         Task DeleteTransactionAsync(int Id);
         Task<int> UpdateTransactionAsync(TransModel element);
 

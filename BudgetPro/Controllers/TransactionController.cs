@@ -22,22 +22,30 @@ namespace BudgetPro.Controllers
         [Route("Create")]
         public async Task<int> InsertTransactionAsync(TransModel foo)
         {
+            // get household Id
             var user = await i.SelectUserAsync(User.Identity.GetUserId<int>());
+            ICategoryDataAccess ic = ConfigurationManager.ConnectionStrings["DefaultConnection"].As<ICategoryDataAccess>();
+            if (user.HouseholdId == null)
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
 
+            // populate new categorymodel
+            CategoryModel entry = new CategoryModel();
+            entry.HouseholdId = user.HouseholdId.Value;
+            entry.Name = foo.CategoryName;
+            // create new category
+            if (foo.CategoryId == 0)
+            {
+                foo.CategoryId = await ic.InsertCategoryAsync(entry);
+            }
             foo.UpdatedByUserId = user.Id;
             foo.Date = DateTimeOffset.Now;
             return await i.InsertTransactionAsync(foo);
         }
-        [HttpGet]
+        [HttpPost]
         [Route("GetTransactions")]
-        public async Task<List<TransModel>> GetTransactionsAsync()
-        {
-            var user = await i.SelectUserAsync(User.Identity.GetUserId<int>());
-
-            if (user.HouseholdId == null)
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
-            
-            return await i.FindTransactionsAsync(user.HouseholdId.Value);
+        public async Task<List<TransModel>> GetTransactionsAsync([FromBody]int AccountId)
+        {            
+            return await i.GetTransactionsByAccountAsync(AccountId);
         }
         [HttpPost]
         [Route("Delete")]

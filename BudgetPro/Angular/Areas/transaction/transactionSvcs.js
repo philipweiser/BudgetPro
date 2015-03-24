@@ -13,8 +13,8 @@
                 return response.data;
             });
     };
-    factory.getTransactions = function () {
-        return $http.get('api/Transaction/GetTransactions')
+    factory.getTransactions = function (AccountId) {
+        return $http.post('api/Transaction/GetTransactions', AccountId)
             .then(function (response) {
                 return response.data;
             });

@@ -1,18 +1,21 @@
 ﻿<div ng-controller="transactionController">
-    <input type="text" placeholder="Id" ng-model="transaction.Id"/>
-    <select ng-options="Name for Name in accounts" ng-model="Name" />
-    <input type="text" placeholder="Description" ng-model="transaction.Description" />
-    <input type="text" placeholder="CategoryId" ng-model="transaction.CategoryId" />
-    <input type="text" placeholder="Amount" ng-model="transaction.Amount" />
-    <input type="text" placeholder="ReconciledAmount" ng-model="transaction.ReconciledAmount" />
-    <input type="text" placeholder="Frequency" ng-model="transaction.Frequency" />
-    
-
-    <input type="button" ng-click="getTransactions(); getAccounts()" value="Get transaction" />
-    <input type="button" ng-click="createTransaction()" value="Create transaction" />
-    <input type="button" ng-click="deleteTransaction()" value="Delete transaction" />
-    <input type="button" ng-click="updateTransaction()" value="Update transaction" />
-
+    <h1>Choose an Account:</h1>
+    <select ng-options="account.Name for account in accounts" ng-model="AccountName" ng-change="accountSelected()"/>
+    <div class="row">
+        <div class="col-xs-12">
+            <input type="text" placeholder="Description" ng-model="transaction.Description" />
+            <input type="text" placeholder="Category" typeahead="name for name in categories" ng-model="transaction.CategoryName" />
+            <input type="text" placeholder="Amount" ng-model="transaction.Amount" />
+            <label>Reconciled</label><input type="checkbox" ng-model="transaction.ReconciledTF" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <input type="button" ng-click="createTransaction()" value="Create transaction" />
+            <input type="button" ng-click="deleteTransaction()" value="Delete transaction" />
+            <input type="button" ng-click="updateTransaction()" value="Update transaction" />
+        </div>
+    </div>
     <div ui-grid="gridOptions" id="grid1" class="myGrid">
     </div>
 </div>

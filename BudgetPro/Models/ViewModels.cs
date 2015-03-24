@@ -42,6 +42,7 @@ namespace BudgetPro.Models
         public Nullable<DateTimeOffset> Updated { get; set; }
         public int UpdatedByUserId { get; set; }
         public int CategoryId { get; set; }
+        public string CategoryName { get; set; }
     }
     public class InsertTransModel
     {
