@@ -31,10 +31,16 @@ namespace BudgetPro.Controllers
             CategoryModel entry = new CategoryModel();
             entry.HouseholdId = user.HouseholdId.Value;
             entry.Name = foo.CategoryName;
+            ICategoryDataAccess ic = ConfigurationManager.ConnectionStrings["DefaultConnection"].As<ICategoryDataAccess>();
+            var check = await ic.CategoryExists(foo.CategoryName);
+            if (check.HasValue)
+            {
+                foo.CategoryId = check.Value;
+            }
             // create new category
             if (foo.CategoryId == 0)
             {
-                ICategoryDataAccess ic = ConfigurationManager.ConnectionStrings["DefaultConnection"].As<ICategoryDataAccess>();
+                
                 foo.CategoryId = await ic.InsertCategoryAsync(entry);
             }
             foo.UpdatedByUserId = user.Id;

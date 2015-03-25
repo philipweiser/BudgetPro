@@ -1,9 +1,15 @@
-﻿using System;
+﻿using BudgetPro.Models;
+using BudgetPro.Models.Database;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Insight.Database;
+using Microsoft.AspNet.Identity;
+using System.Threading.Tasks;
 
 namespace BudgetPro.Controllers
 {
@@ -11,31 +17,18 @@ namespace BudgetPro.Controllers
     [RoutePrefix("api/Dashboard")]
     public class DashboardController : ApiController
     {
-        // GET: api/Bank
-        public IEnumerable<string> Get()
+        private IDashDataAccess i = ConfigurationManager.ConnectionStrings["DefaultConnection"].As<IDashDataAccess>();
+        //GET
+        [Route("GetDashboard")]
+        [HttpGet]
+        public async Task<DashModel> GetDashboard()
         {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET: api/Bank/5
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST: api/Bank
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT: api/Bank/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/Bank/5
-        public void Delete(int id)
-        {
+            var user = await i.SelectUserAsync(User.Identity.GetUserId<int>());
+            DashModel model = new DashModel();
+            model.MyAccounts = await i.FindAccountsAsync(user.HouseholdId.Value);
+            model.MyBudget = (await i.GetBudgetItemsByHousehold(user.HouseholdId.Value)).ToList();
+            model.RecentTransactions = await i.GetRecentTransactionsAsync(user.HouseholdId.Value);
+            return model;
         }
     }
 }

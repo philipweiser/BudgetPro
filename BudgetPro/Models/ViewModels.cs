@@ -19,6 +19,9 @@ namespace BudgetPro.Models
     public class DashModel
     {
         public DashModel() { }
+        public List<TransModel> RecentTransactions { get; set; }
+        public List<BankModel> MyAccounts { get; set; }
+        public List<BudgetItem> MyBudget { get; set; }
     }
     public class HouseModel
     {

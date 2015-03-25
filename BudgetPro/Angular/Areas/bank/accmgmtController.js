@@ -36,10 +36,12 @@
             };
             $scope.createBank = function () {
                 bankSvcs.createBank($scope.newBankName).then(function (response) {
+                    $scope.getBanks();
                 });
             }
             $scope.deleteBank = function (id) {
                 bankSvcs.deleteBank(id).then(function (response) {
+                    $scope.getBanks();
                 });
             }
             $scope.getBanks = function () {
@@ -49,10 +51,12 @@
             }
             $scope.editBankSubmit = function () {
                 bankSvcs.updateBank($scope.editBank).then(function (response) {
+                    $scope.getBanks();
                 });
             }
             $scope.whichEdit = function (entity) {
                 $scope.editBank = entity;
             }
+            $scope.getBanks();
         }])
 })();

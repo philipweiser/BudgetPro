@@ -1,12 +1,12 @@
 ﻿<div ng-controller="budgetController">
     <input type="text" placeholder="Description" ng-model="budgetItem.Description" />
-    <input type="text" placeholder="Category" typeahead="category.CategoryName for category in categories" ng-model="budgetItem.CategoryName" />
+    <input type="text" placeholder="Category" typeahead="category.Name for category in categories" ng-model="budgetItem.CategoryName" />
     <input type="text" placeholder="Amount" ng-model="budgetItem.Amount" />
     <input type="text" placeholder="Frequency" ng-model="budgetItem.Frequency" />
     
     <input type="button" ng-click="createBudget()" value="Create Budget" />
     <input type="button" ng-click="updateBudgetItem()" value="Update BudgetItem" />
 
-    <div ui-grid="gridOptions" id="grid1" class="myGrid">
+    <div ui-grid="gridOptions" ui-grid-pagination id="grid1" class="myGrid">
     </div>
 </div>

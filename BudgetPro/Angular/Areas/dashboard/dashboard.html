@@ -1,4 +1,36 @@
 ﻿<div ng-controller="dashboardController">
-    This is the dashboard
-
+    <div class="row">
+        <div class="col-md-4 column">
+            <div class="row">
+                <div class="col-md-12 column">
+                    <div ng-repeat="account in accounts">
+                        {{account.Name}}
+                        {{account.Balance | currency}}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 column">
+                    <div ng-repeat="transaction in transactions">
+                        {{transaction.Date | date}}
+                        {{transaction.Amount | currency}}
+                        {{transaction.CategoryName}}
+                        {{transaction.Description}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 column">
+                        
+            <!--<nvd3-multi-bar-chart data="budgetData"
+                                  id="budgetGraph"
+                                  xaxistickformat="xAxisTickFormatFunction()"
+                                  width="550"
+                                  height="350"
+                                  showxaxis="true"
+                                  showyaxis="true">
+                <svg></svg>
+            </nvd3-multi-bar-chart>-->
+        </div>
+    </div>
 </div>

@@ -43,6 +43,23 @@ namespace BudgetPro.Controllers
             if (user.HouseholdId == null)
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
             foo.HouseholdId = user.HouseholdId.Value;
+
+            // populate new categorymodel
+            CategoryModel entry = new CategoryModel();
+            entry.HouseholdId = user.HouseholdId.Value;
+            entry.Name = foo.CategoryName;
+            ICategoryDataAccess ic = ConfigurationManager.ConnectionStrings["DefaultConnection"].As<ICategoryDataAccess>();
+            var check = await ic.CategoryExists(foo.CategoryName);
+            if (check.HasValue)
+            {
+                foo.CategoryId = check.Value;
+            }
+            // create new category
+            if (foo.CategoryId == 0)
+            {
+
+                foo.CategoryId = await ic.InsertCategoryAsync(entry);
+            }
             return await i.InsertBudgetItemAsync(foo);
         }
         [HttpPost]
@@ -59,10 +76,16 @@ namespace BudgetPro.Controllers
             CategoryModel entry = new CategoryModel();
             entry.HouseholdId = user.HouseholdId.Value;
             entry.Name = foo.CategoryName;
+            ICategoryDataAccess ic = ConfigurationManager.ConnectionStrings["DefaultConnection"].As<ICategoryDataAccess>();
+            var check = await ic.CategoryExists(foo.CategoryName);
+            if (check.HasValue)
+            {
+                foo.CategoryId = check.Value;
+            }
             // create new category
             if (foo.CategoryId == 0)
             {
-                ICategoryDataAccess ic = ConfigurationManager.ConnectionStrings["DefaultConnection"].As<ICategoryDataAccess>();
+
                 foo.CategoryId = await ic.InsertCategoryAsync(entry);
             }
             return await i.UpdateBudgetItemAsync(foo);

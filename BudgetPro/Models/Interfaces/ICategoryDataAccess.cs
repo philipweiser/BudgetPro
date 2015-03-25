@@ -11,11 +11,13 @@ namespace BudgetPro.Models.Database
         Task<int> InsertCategoryAsync(CategoryModel entry);
 
         // auto procs
-        Task<List<CategoryModel>> FindCategoriesAsync(int HouseholdId);
+        Task<List<CategoryModel>> GetCategoriesByHousehold(int HouseholdId);
         Task DeleteCategoryAsync(int Id);
         Task<int> UpdateCategoryAsync(CategoryModel entry);
 
         [Sql(Schema = "Security")]
         Task<UserModel> SelectUserAsync(int Id);
+
+        Task<int?> CategoryExists(string name);
     }
 }

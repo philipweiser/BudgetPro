@@ -38,10 +38,10 @@ namespace BudgetPro.Controllers
         {
             var user = await i.SelectUserAsync(User.Identity.GetUserId<int>());
 
-            if (user.HouseholdId == null)
+            if (user == null || user.HouseholdId == null)
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
 
-            return await i.FindCategoriesAsync(user.HouseholdId.Value);
+            return (await i.GetCategoriesByHousehold(user.HouseholdId.Value)).OrderBy(t => t.Name).ToList();
         }
         [HttpPost]
         [Route("Delete")]
