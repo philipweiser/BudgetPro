@@ -16,7 +16,7 @@
     factory.getBudget = function () {
         return $http.get('api/Budget/GetBudget')
             .then(function (response) {
-                return response.data;
+                return response;
             });
     };
     factory.updateBudgetItem = function (foo) {

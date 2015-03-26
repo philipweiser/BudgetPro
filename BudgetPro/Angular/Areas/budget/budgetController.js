@@ -1,6 +1,18 @@
 ﻿angular.module('app')
     // Path: /
-    .controller('budgetController', ['$scope', '$state', '$stateParams', 'budgetItemSvcs', 'categorySvcs', function ($scope, $state, $stateParams, budgetItemSvcs, categorySvcs) {
+    .controller('budgetController', ['$scope', '$state', '$stateParams', 'budgetItemSvcs', 'categorySvcs', '$location', function ($scope, $state, $stateParams, budgetItemSvcs, categorySvcs, $location) {
+        $scope.getBudget = function () {
+            budgetItemSvcs.getBudget()
+                .then(function (response) {
+                    if (response.data != null) {
+                        $scope.budgetItems = response.data;
+                    } else {
+                        $location.path("/Household");
+                    }
+                });
+        };
+        $scope.isDebit = true;
+        $scope.getBudget();
         $scope.budgetItem = {
             Id: '',
             Description: '',
@@ -15,7 +27,7 @@
             name: '',
             width: '80', field: 'Id',
             cellTemplate: '<div class="ui-grid-cell-contents" title="Edit Budget Item">' +
-                '<input type="button"  ng-click="grid.appScope.whichEdit(row.entity)" class="btn" value="Edit" /></div>',
+                '<input type="button"  ng-click="grid.appScope.whichEdit(row.entity)" class="btn btn-primary" value="Edit" /></div>',
             enableSorting: false,
             enableFiltering: false,
             enableColumnMenu: false,
@@ -24,7 +36,7 @@
                 name: ' ',
                 width: '80', field: 'Id',
                 cellTemplate: '<div class="ui-grid-cell-contents" title="Delete Budget Item">' +
-                        '<input type="button"  ng-click="grid.appScope.deleteBudgetItem(row.entity.Id)" class="btn" value="Delete" /></div>',
+                        '<input type="button"  ng-click="grid.appScope.deleteBudgetItem(row.entity.Id)" class="btn btn-danger" value="Delete" /></div>',
                 enableSorting: false,
                 enableFiltering: false,
                 enableColumnMenu: false,
@@ -43,21 +55,19 @@
             enableFiltering: true,
             paginationPageSizes: [10, 20, 50],
             paginationPageSize: 10,
-            enablePaginationControls:true,
+            enablePaginationControls: true,
         };
         $scope.budgetItems = [];
-        $scope.getBudget = function () {
-            budgetItemSvcs.getBudget()
-                .then(function (response) {
-                    $scope.budgetItems = response;
-                });
-        };
+
         $scope.getCategories = function () {
             categorySvcs.getCategories().then(function (response) {
                 $scope.categories = response;
             });
         }
         $scope.createBudget = function () {
+            if ($scope.isDebit) {
+                $scope.budgetItem.Amount = -$scope.budgetItem.Amount;
+            }
             budgetItemSvcs.createBudgetItem($scope.budgetItem)
                 .then(function (response) {
                     $scope.getBudget();
@@ -78,7 +88,6 @@
                     $scope.resetFields();
                 });
         };
-        $scope.getBudget();
         $scope.getCategories();
         $scope.resetFields = function () {
             $scope.budgetItem.Amount = '';

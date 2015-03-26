@@ -1,24 +1,24 @@
 ﻿angular.module('app')
     // Path: /
-    .controller('dashboardController', ['$scope', '$state', '$stateParams', 'dashSvcs', function ($scope, $state, $stateParams, dashSvcs) {
+    .controller('dashboardController', ['$scope', '$state', '$stateParams', 'dashSvcs', '$location', function ($scope, $state, $stateParams, dashSvcs, $location) {
         $scope.getDashboard = function () {
             dashSvcs.getDash().then(function (response) {
-                console.log(response);
+                if(response.HouseholdId != 0){
                 $scope.dashboard = response;
                 $scope.accounts = $scope.dashboard.MyAccounts;
                 $scope.transactions = $scope.dashboard.RecentTransactions;
                 $scope.budgetItems = $scope.dashboard.MyBudget;
                 $scope.makeBudget($scope.budgetItems);
+                } else {
+                    $location.path("/Household");
+                }
             });
         }
-        $scope.options = { width: 500, height: 300, 'bar': 'aaa' };
-        //$scope.data = [1, 2, 3, 4];
         $scope.hovered = function (d) {
             $scope.barValue = d;
             $scope.$apply();
         };
         $scope.data = [];
-        $scope.barValue = 'None';
         $scope.getDashboard();
         $scope.makeBudget= function (data){
             debits = 0;
@@ -33,21 +33,3 @@
             $scope.data = [debits, credits]
         }
     }]);
-angular.module('app').directive('bars', function ($parse) {
-    return {
-        restrict: 'E',
-        replace: true,
-        template: '<div id="chart"></div>',
-        link: function (scope, element, attrs) {
-            var data = attrs.data.split(','),
-            chart = d3.select('#chart')
-              .append("div").attr("class", "chart")
-              .selectAll('div')
-              .data(data).enter()
-              .append("div")
-              .transition().ease("elastic")
-              .style("width", function(d) { return d + "%"; })
-              .text(function(d) { return d + "%"; });
-        } 
-    };
-});

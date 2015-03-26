@@ -25,10 +25,20 @@ namespace BudgetPro.Controllers
         {
             var user = await i.SelectUserAsync(User.Identity.GetUserId<int>());
             DashModel model = new DashModel();
+            if (user.HouseholdId != null)
+            {
+
+            
+            model.HouseholdId = user.HouseholdId.Value;
             model.MyAccounts = await i.FindAccountsAsync(user.HouseholdId.Value);
             model.MyBudget = (await i.GetBudgetItemsByHousehold(user.HouseholdId.Value)).ToList();
             model.RecentTransactions = await i.GetRecentTransactionsAsync(user.HouseholdId.Value);
             return model;
+            }
+            else
+            {
+                return model;
+            }
         }
     }
 }

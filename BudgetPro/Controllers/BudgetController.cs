@@ -25,7 +25,7 @@ namespace BudgetPro.Controllers
             var user = await i.SelectUserAsync(User.Identity.GetUserId<int>());
 
             if (user.HouseholdId == null)
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                return null;
             return await i.GetBudgetItemsByHousehold(user.HouseholdId.Value);
         }
         [HttpPost]

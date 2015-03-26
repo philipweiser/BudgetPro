@@ -64,7 +64,7 @@
                     if (!ngModel) return; // do nothing if no ng-model
                     console.log(attrs);
                     // watch own value and re-validate on change
-                    scope.$watch('registerData.p7assword', function () {
+                    scope.$watch('registerData.password', function () {
                         validate();
                     });
 

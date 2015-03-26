@@ -13,13 +13,15 @@
                 { name: 'Email' }
             ]
         };
-
+        $scope.gridHide = true;
+        $scope.joinHide = true;
         $scope.inviteToHousehold = function () {
             if ($scope.inviteEmail == null || $scope.inviteEmail == "") {
                 return $scope.message = "Not a valid email";
             }
-            houseSvcs.inviteToHousehold($scope.inviteEmail).then(function(response){
-                console.log(response);
+            houseSvcs.inviteToHousehold($scope.inviteEmail).then(function (response) {
+                $scope.inviteEmail = '';
+                return $scope.message = "Your invite was sent successfully.";
             });
         };
         $scope.leaveHousehold = function () {
@@ -29,7 +31,12 @@
         };
         $scope.getMembers = function () {
             houseSvcs.getMembers().then(function (response) {
-                $scope.houseData = response;
+                if (response.data.length != 0) {
+                    $scope.gridHide = false;
+                    $scope.houseData = response.data;
+                } else {
+                    $scope.gridHide = true;
+                };
             });
         };
         $scope.createHousehold = function () {
@@ -42,5 +49,21 @@
                 $scope.getMembers();
             });
         };
+        $scope.joinHousehold = function () {
+            houseSvcs.joinHousehold().then(function (response) {
+
+                $scope.getMembers();
+            })
+        }
         $scope.getMembers();
+        $scope.canJoin = function () {
+            houseSvcs.canJoin().then(function (response) {
+                if (response.data == null) {
+                    $scope.joinHide = true;
+                } else {
+                    $scope.joinHide = false;
+                }
+            })
+        }
+        $scope.canJoin();
     }]);

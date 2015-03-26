@@ -2,7 +2,7 @@
     var factory = {};
     factory.getDash = function () {
         return $http.get('/api/Dashboard/GetDashboard')
-            .then(function (response) { console.log(response);return response.data });
+            .then(function (response) {return response.data });
     };
     return factory;
 }]);

@@ -1,12 +1,46 @@
 ﻿<div ng-controller="budgetController">
-    <input type="text" placeholder="Description" ng-model="budgetItem.Description" />
-    <input type="text" placeholder="Category" typeahead="category.Name for category in categories" ng-model="budgetItem.CategoryName" />
-    <input type="text" placeholder="Amount" ng-model="budgetItem.Amount" />
-    <input type="text" placeholder="Frequency" ng-model="budgetItem.Frequency" />
-    
-    <input type="button" ng-click="createBudget()" value="Create Budget" />
-    <input type="button" ng-click="updateBudgetItem()" value="Update BudgetItem" />
-
-    <div ui-grid="gridOptions" ui-grid-pagination id="grid1" class="myGrid">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>Budget</h1>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom:10px">
+        <div class="col-sm-12">
+            <div ui-grid="gridOptions" ui-grid-pagination id="grid1" class="myGrid">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="input-group input-group-md">
+                <span class="input-group-addon">
+                    <i class="fa fa-user"></i>
+                </span>
+                <input type="text" class="form-control input-lg" ng-model="budgetItem.Description" placeholder="Description" />
+            </div>
+            <div class="input-group input-group-md">
+                <span class="input-group-addon">
+                    <i class="fa fa-user"></i>
+                </span>
+                <input type="text" class="form-control input-lg" typeahead="category.Name for category in categories" ng-model="budgetItem.CategoryName" placeholder="Category" />
+            </div>
+            <div class="input-group input-group-md">
+                <span class="input-group-addon">
+                    <i class="fa fa-user"></i>
+                </span>
+                <input type="text" class="form-control input-lg" ng-model="budgetItem.Amount" placeholder="Amount" />
+            </div>
+            <div class="input-group input-group-md">
+                <span class="input-group-addon">
+                    <i class="fa fa-user"></i>
+                </span>
+                <input type="text" class="form-control input-lg" ng-model="budgetItem.Frequency" placeholder="Frequency" />
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <input type="button" class="form-control btn-primary btn" value="Create Budget Item" ng-click="createBudget()" style="margin-bottom:8px;margin-top:5px;"/>
+            <input type="button" class="form-control btn-primary btn" value="Update Budget Item" ng-click="updateBudgetItem()" />
+            <input type="checkbox" class="form-control anim-checkbox" value="Debit" ng-model="isDebit"/>
+        </div>
     </div>
 </div>

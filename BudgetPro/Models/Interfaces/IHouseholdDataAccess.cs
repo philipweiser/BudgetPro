@@ -9,7 +9,7 @@ namespace BudgetPro.Models.Database
     public interface IHouseholdDataAccess
     {
         // user defined procs
-        Task<IEnumerable<UserModel>> GetHouseholdMembersAsync(int userId);
+        Task<List<ApplicationUser>> GetHouseholdMembersAsync(int userId);
         
 
         // auto procs
@@ -24,6 +24,10 @@ namespace BudgetPro.Models.Database
         Task InsertUserClaimAsync(UserClaim claim);
         [Sql(Schema = "Security")]
         Task<ApplicationUser> SelectUserAsync(int Id);
+        [Sql(Schema = "Security")]
+        Task<int> UpdateUser(ApplicationUser User);
+
+        Task<int?> GetInvitationForUser(string Email);
     }
     //var x = new Household { Name = "Charly" };
     //db.InsertHouseholdAsync(x)

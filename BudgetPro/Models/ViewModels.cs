@@ -19,6 +19,7 @@ namespace BudgetPro.Models
     public class DashModel
     {
         public DashModel() { }
+        public int HouseholdId { get; set; }
         public List<TransModel> RecentTransactions { get; set; }
         public List<BankModel> MyAccounts { get; set; }
         public List<BudgetItem> MyBudget { get; set; }
@@ -66,6 +67,19 @@ namespace BudgetPro.Models
         public int? HouseholdId { get; set; }
         public string PhoneNumber { get; set; }
         public string UserName { get; set; }
+
+        public static implicit operator UserModel(ApplicationUser user)
+        {
+            return new UserModel
+            {
+                Id = user.Id,
+                Name = user.Name,
+                Email = user.Email,
+                HouseholdId = user.HouseholdId,
+                PhoneNumber = user.PhoneNumber,
+                UserName = user.UserName
+            };
+        }
     }
     public class CategoryModel
     {

@@ -22,19 +22,46 @@ namespace BudgetPro.Controllers
         private IHouseholdDataAccess i = ConfigurationManager.ConnectionStrings["DefaultConnection"].As<IHouseholdDataAccess>();
         // GET: api/Household
         [HttpGet]
+        [Route("CanJoin")]
+        public async Task<int?> CanJoin()
+        {
+            var email = (await i.SelectUserAsync(User.Identity.GetUserId<int>())).Email;
+            return await i.GetInvitationForUser(email);
+        }
+        [HttpGet]
         [Route("GetMembers")]
-        public async Task<IEnumerable<UserModel>> GetHouseholdMembers()
+        public async Task<List<UserModel>> GetHouseholdMembers()
         {
             var id = User.Identity.GetUserId<int>();
-            return await i.GetHouseholdMembersAsync(id);
+            return (await i.GetHouseholdMembersAsync(id)).Select(u=>(UserModel)u).ToList();
         }
-
+        [HttpGet]
+        [Route("Join")]
+        public async Task<int> JoinHousehold()
+        {
+            var toUserId = User.Identity.GetUserId<int>();
+            var email = (await i.SelectUserAsync(toUserId)).Email;
+            var invitation = await i.GetInvitationForUser(email);
+            var user = await i.SelectUserAsync(toUserId);
+            user.HouseholdId = invitation;
+            return await i.UpdateUser(user);
+        }
         [HttpPost]
         [Route("Leave")]
-        public void DeleteHouseholdAsync()
+        public async void DeleteHouseholdAsync()
         {
             var id = User.Identity.GetUserId<int>();
-            i.DeleteHouseholdAsync(id);
+            var users = await i.GetHouseholdMembersAsync(id);
+            var user = users.Single(u => u.Id == id);
+            if (users.Count() == 1)
+            {
+                i.DeleteHouseholdAsync(id);
+            }
+            else
+            {
+                user.HouseholdId = null;
+                await i.UpdateUser(user);
+            }
         }
         [HttpPost]
         [Route("Create")]

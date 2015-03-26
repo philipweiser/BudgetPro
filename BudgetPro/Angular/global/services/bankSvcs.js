@@ -9,7 +9,7 @@
     };
     factory.getBanks = function () {
         return $http.get('api/Bank/GetBanks').then(function (response) {
-            return response.data;
+            return response;
         });
     };
     factory.updateBank = function (editBank) {

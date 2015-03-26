@@ -1,11 +1,12 @@
 ﻿<div ng-controller="housemgmtController">
+    <h1>Household</h1>
     {{message}}
-    Your Household
-    <div ui-grid=gridOptions id="grid1" class="myGrid">
+    <div ng-hide="gridHide">
+        <div ui-grid=gridOptions id="grid1" class="houseGrid">
+        </div>
     </div>
     <div class="row">
-        <div class="col-sm-6">
-            <label for="name">Invite User to Household</label>
+        <div class="col-sm-6" ng-hide="gridHide">
             <div class="input-group input-group-md">
                 <span class="input-group-addon">
                     <i class="fa fa-user"></i>
@@ -15,8 +16,7 @@
             </div>
             <input type="button" class="form-control btn-primary btn" value="Invite" ng-click="inviteToHousehold()" />
         </div>
-        <div class="col-sm-6">
-            <label for="newHouseName">Create Household</label>
+        <div class="col-sm-6" ng-show="gridHide">
             <div class="input-group input-group-md">
                 <span class="input-group-addon">
                     <i class="fa fa-user"></i>
@@ -25,8 +25,11 @@
             </div>
             <input type="button" class="form-control btn-primary" value="Create" ng-click="createHousehold()" />
         </div>
-        <div class="col-xs-6" style="margin-top:15px;">
+        <div class="col-xs-6" style="margin-top:15px;" ng-hide="gridHide">
             <input type="button" class="form-control btn-danger" value="Leave Household" ng-click="leaveHousehold()" />
+        </div>
+        <div class="col-xs-6" style="margin-top:15px;" ng-hide="joinHide">
+            <input type="button" class="form-control btn-primary" value="Join Household" ng-click="joinHousehold()" />
         </div>
     </div>
 </div>

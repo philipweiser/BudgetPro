@@ -1,42 +1,39 @@
 ﻿<div ng-controller="accmgmtController">
     {{message}}
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 column">
-                <div class="page-header">
-                    <h1>
-                        Accounts
-                    </h1>
-                </div>
+    <div class="row">
+        <div class="col-md-12 column">
+            <div class="page-header">
+                <h1>
+                    Accounts
+                </h1>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12 column">
-                <div class="control-group">
-                    <label class="control-label" for="newName">Name</label>
-                    <div class="controls">
-                        <input id="newName" name="newName" ng-model="newBankName" type="text" placeholder="Account Name" class="input-medium">
-                    </div>
-                </div>
-                <input type="button" value="Create" ng-click="createBank()" />
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 column">
+            <div ui-grid="gridOptions" id="grid1" class="myGrid">
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12 column">
-                <div ui-grid="gridOptions" id="grid1" class="myGrid">
-                </div>
-
-                <h1>Edit Account</h1>
-                <div class="control-group">
-                    <label class="control-label" for="newName">Name</label>
-                    <div class="controls">
-                        <input id="newName" name="newName" ng-model="editBank.Name" type="text" placeholder="Account Name" class="input-medium">
-
-                    </div>
-                </div>
-
-                <input type="button" value="Submit Changes" ng-click="editBankSubmit()" />
+        <div class="col-sm-3">
+            <h2>Create Account</h2>
+            <div class="input-group input-group-md">
+                <span class="input-group-addon">
+                    <i class="fa fa-user"></i>
+                </span>
+                <input type="text" ng-model="newBankName" placeholder="Account Name" class="form-control input-lg" />
             </div>
+            <input type="button" class="form-control btn-primary" value="Create" ng-click="createBank()" />
+        </div>
+        <div class="col-sm-3">
+            <h2>Edit Account</h2>
+            <div class="input-group input-group-md">
+                <span class="input-group-addon">
+                    <i class="fa fa-user"></i>
+                </span>
+                <input type="text" ng-model="editBank.Name" placeholder="Account Name" class="form-control input-lg" />
+            </div>
+            <input type="button" class="form-control btn-primary" value="Submit Changes" ng-click="editBankSubmit()" />
         </div>
     </div>
 </div>

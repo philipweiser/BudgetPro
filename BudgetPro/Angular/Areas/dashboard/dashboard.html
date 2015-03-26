@@ -3,7 +3,8 @@
         <div class="col-md-4 column">
             <div class="row">
                 <div class="col-md-12 column">
-                    <div ng-repeat="account in accounts">
+                    <h2>Accounts</h2>
+                    <div ng-repeat=" account in accounts">
                         {{account.Name}}
                         {{account.Balance | currency}}
                     </div>
@@ -11,6 +12,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12 column">
+                    <h2>Recent Transactions</h2>
                     <div ng-repeat="transaction in transactions">
                         {{transaction.Date | date}}
                         {{transaction.Amount | currency}}
@@ -21,7 +23,7 @@
             </div>
         </div>
         <div class="col-md-8 column">
-                        
+
             <!--<nvd3-multi-bar-chart data="budgetData"
                                   id="budgetGraph"
                                   xaxistickformat="xAxisTickFormatFunction()"

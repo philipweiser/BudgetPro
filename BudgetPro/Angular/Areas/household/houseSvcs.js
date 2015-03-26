@@ -11,10 +11,11 @@
     };
     factory.getMembers = function () {
         return $http.get('/api/Household/GetMembers')
-            .then(function (response) { return response.data });
+            .then(function (response) { return response });
     };
-    factory.updateHouse = function () {
-
+    factory.joinHousehold = function () {
+        return $http.get('/api/Household/Join')
+            .then(function (response) { return response });
     };
     factory.leaveHousehold = function () {
         return $http.post('/api/Household/Leave')
@@ -22,7 +23,11 @@
     };
     factory.inviteToHousehold = function (email) {
         return $http.post('/api/Household/Invite', '"' + email + '"')
-            .then(function (response) { console.log(response);return response.data });
+            .then(function (response) {return response.data });
+    };
+    factory.canJoin = function () {
+        return $http.get('/api/Household/CanJoin')
+            .then(function (response) { return response });
     };
     return factory;
 }]);

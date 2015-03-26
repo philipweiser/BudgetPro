@@ -1,6 +1,6 @@
 ﻿angular.module('app')
     // Path: /
-    .controller('transactionController', ['$scope', '$state', '$stateParams', 'transactionSvcs', 'categorySvcs', 'bankSvcs', function ($scope, $state, $stateParams, transactionSvcs, categorySvcs, bankSvcs) {
+    .controller('transactionController', ['$scope', '$state', '$stateParams', 'transactionSvcs', 'categorySvcs', 'bankSvcs', '$location', function ($scope, $state, $stateParams, transactionSvcs, categorySvcs, bankSvcs, $location) {
         $scope.transaction = {
             Id: '',
             AccountId: '',
@@ -17,12 +17,19 @@
         $scope.AccountName = [];
         $scope.CategoryName = '';
         $scope.transactions = [];
-        bankSvcs.getBanks().then(function (response) { $scope.accounts = response; });
+        $scope.categories = [];
+        bankSvcs.getBanks().then(function (response) {
+            if (response.data != null) {
+                $scope.accounts = response.data;
+            } else {
+                $location.path("/Household");
+            }
+        });
         $scope.columns = [{
             name: '',
             width: '80', field: 'Id',
             cellTemplate: '<div class="ui-grid-cell-contents" title="Edit Transaction">' +
-                '<input type="button"  ng-click="grid.appScope.whichEdit(row.entity)" class="btn" value="Edit" /></div>',
+                '<input type="button"  ng-click="grid.appScope.whichEdit(row.entity)" class="form-control btn btn-primary" value="Edit" /></div>',
             enableSorting: false,
             enableFiltering: false,
             enableColumnMenu: false
@@ -31,7 +38,7 @@
                 name: ' ',
                 width: '80', field: 'Id',
                 cellTemplate: '<div class="ui-grid-cell-contents" title="Delete Transaction">' +
-                        '<input type="button"  ng-click="grid.appScope.deleteTransaction(row.entity.Id)" class="btn" value="Delete" /></div>',
+                        '<input type="button"  ng-click="grid.appScope.deleteTransaction(row.entity.Id)" class="form-control btn btn-danger" value="Delete" /></div>',
                 enableSorting: false,
                 enableFiltering: false,
                 enableColumnMenu: false
@@ -39,7 +46,7 @@
             { name: 'Description' },
             { name: 'Category', field: 'CategoryName' },
             { name: 'Amount', cellFilter: 'currency' },
-            { name: 'ReconciledAmount' },
+            { name: 'ReconciledAmount', cellFilter: 'currency' },
             { name: 'Date', cellFilter: 'date' },
         ];
         $scope.whichEdit = function (entity) {
@@ -67,7 +74,11 @@
         $scope.getCategories = function () {
             return categorySvcs.getCategories()
                 .then(function (response) {
-                    $scope.categories = response;
+                    if (response != null) {
+                    $scope.categories = response.data;
+                    } else {
+                        $location.path("/Household");
+                    }
                 })
         }
         $scope.createTransaction = function () {
