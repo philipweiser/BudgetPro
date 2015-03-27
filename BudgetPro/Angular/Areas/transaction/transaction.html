@@ -1,21 +1,47 @@
 ﻿<div ng-controller="transactionController">
-    <h1>Transactions</h1>
-    <select ng-options="account.Name for account in accounts" placeholder="Choose an Account" ng-model="AccountName" ng-change="accountSelected()"/>
-    <div class="row">
-        <div class="col-xs-12">
-            <input type="text" placeholder="Description" ng-model="transaction.Description" />
-            <input type="text" placeholder="Category" typeahead="c.Name for c in categories" ng-model="CategoryName" />
-            <input type="text" placeholder="Amount" ng-model="transaction.Amount" />
-            <label>Reconciled</label><input type="checkbox" ng-model="transaction.ReconciledTF" />
-            <label>Debit</label><input type="checkbox" ng-model="transaction.Debit" />
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12">
-            <input type="button" ng-click="createTransaction()" value="Create transaction" />
-            <input type="button" ng-click="updateTransaction()" value="Update transaction" />
-        </div>
-    </div>
+    <h1>Transactions</h1><hr />
+    <select class="form-control input-group-lg" ng-options="account.Name for account in accounts" placeholder="Choose an Account" ng-model="AccountName" ng-change="accountSelected()"><option value="" disabled class="text-muted">Select An Account</option></select>
     <div ui-grid="gridOptions" ui-grid-pagination id="grid1" class="myGrid">
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <h2>Create and Edit Transactions</h2>
+            <hr />
+        </div>
+        <div class="col-xs-12">
+            <div class="col-sm-6">
+                <div class="input-group input-group-md">
+                    <span class="input-group-addon">
+                        <i class="fa fa-user"></i>
+                    </span>
+                    <input type="text" class="form-control input-lg" ng-model="transaction.Description" placeholder="Description" />
+                </div>
+                <div class="input-group input-group-md">
+                    <span class="input-group-addon">
+                        <i class="fa fa-user"></i>
+                    </span>
+                    <input type="text" class="form-control input-lg" ng-model="CategoryName" typeahead="c.Name for c in categories" placeholder="Category" />
+                </div>
+                <div class="input-group input-group-md">
+                    <span class="input-group-addon">
+                        <i class="fa fa-user"></i>
+                    </span>
+                    <input type="text" class="form-control input-lg" ng-model="transaction.Amount" placeholder="Amount" />
+                </div>
+            </div>
+            <div class="col-sm-6">
+
+                <label>Reconciled<input type="checkbox" class="form-control anim-checkbox" ng-model="transaction.ReconciledTF" /></label>
+                <label>Debit<input type="checkbox" class="form-control anim-checkbox" ng-model="transaction.Debit" ng-change="debitCredit()"/></label>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="col-xs-6">
+                <input type="button" class="form-control btn-primary btn" value="Create Transaction" ng-click="createTransaction()" />
+            </div>
+            <div class="col-xs-6">
+                <input type="button" class="form-control btn-primary btn" value="Update Transaction" ng-click="updateTransaction()" />
+            </div>
+        </div>
     </div>
 </div>

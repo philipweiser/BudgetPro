@@ -1,7 +1,7 @@
 ﻿<div ng-controller="budgetController">
     <div class="row">
         <div class="col-xs-12">
-            <h1>Budget</h1>
+            <h1>Budget</h1><hr />
         </div>
     </div>
     <div class="row" style="margin-bottom:10px">
@@ -11,7 +11,11 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-xs-12">
+            <h2 style="margin-left:10px;">Create and Update Budget Items</h2><hr />
+        </div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-4">
             <div class="input-group input-group-md">
                 <span class="input-group-addon">
                     <i class="fa fa-user"></i>
@@ -40,7 +44,10 @@
         <div class="col-sm-6">
             <input type="button" class="form-control btn-primary btn" value="Create Budget Item" ng-click="createBudget()" style="margin-bottom:8px;margin-top:5px;"/>
             <input type="button" class="form-control btn-primary btn" value="Update Budget Item" ng-click="updateBudgetItem()" />
-            <input type="checkbox" class="form-control anim-checkbox" value="Debit" ng-model="isDebit"/>
+            <div class="col-xs-12">
+
+                <label><input type="checkbox" class="form-control anim-checkbox" ng-model="isDebit">Debit</label>
+            </div>
         </div>
     </div>
 </div>

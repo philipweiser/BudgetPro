@@ -43,7 +43,7 @@
             },
             { name: 'Description' },
             { name: 'Category', field: 'CategoryName' },
-            { name: 'Amount' },
+            { name: 'Amount', cellFilter:'currency' },
             { name: 'Frequency' }
         ];
         $scope.whichEdit = function (entity) {

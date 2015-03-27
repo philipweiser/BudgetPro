@@ -12,7 +12,7 @@
             AccountName: '',
             CategoryName: '',
             ReconciledTF: false,
-            Debit: true,
+            Debit: false,
         };
         $scope.AccountName = [];
         $scope.CategoryName = '';
@@ -49,10 +49,15 @@
             { name: 'ReconciledAmount', cellFilter: 'currency' },
             { name: 'Date', cellFilter: 'date' },
         ];
+        $scope.debitCredit = function(){
+            $scope.transaction.Amount = - $scope.transaction.Amount;
+            $scope.transaction.ReconciledAmount = - $scope.transaction.ReconciledAmount;
+        }
         $scope.whichEdit = function (entity) {
             $scope.transaction = entity;
             $scope.transaction.Amount == $scope.transaction.ReconciledAmount ? $scope.transaction.ReconciledTF = true : $scope.transaction.ReconciledTF = false;
             $scope.CategoryName = entity.CategoryName;
+            $scope.transaction.Amount > 0 ? $scope.transaction.Debit = false : $scope.transaction.Debit = true;
         }
         $scope.gridOptions = {
             data: 'transactions',
@@ -86,8 +91,11 @@
                 $scope.transaction.ReconciledAmount = $scope.transaction.Amount;
             $scope.transaction.CategoryName = $scope.CategoryName;
             if ($scope.transaction.Debit) {
-                $scope.transaction.Amount = -$scope.transaction.Amount;
-                $scope.transaction.ReconciledAmount = -$scope.transaction.ReconciledAmount;
+                $scope.transaction.Amount = -Math.abs($scope.transaction.Amount);
+                $scope.transaction.ReconciledAmount = -Math.abs($scope.transaction.ReconciledAmount);
+            } else {
+                $scope.transaction.Amount = Math.abs($scope.transaction.Amount);
+                $scope.transaction.ReconciledAmount = Math.abs($scope.transaction.ReconciledAmount);
             }
             transactionSvcs.createTransaction($scope.transaction)
                 .then(function (response) {
@@ -108,8 +116,11 @@
             else
                 $scope.transaction.ReconciledAmount = 0;
             if ($scope.transaction.Debit) {
-                $scope.transaction.Amount = -$scope.transaction.Amount;
-                $scope.transaction.ReconciledAmount = -$scope.transaction.ReconciledAmount;
+                $scope.transaction.Amount = -Math.abs($scope.transaction.Amount);
+                $scope.transaction.ReconciledAmount = -Math.abs($scope.transaction.ReconciledAmount);
+            } else {
+                $scope.transaction.Amount = Math.abs($scope.transaction.Amount);
+                $scope.transaction.ReconciledAmount = Math.abs($scope.transaction.ReconciledAmount);
             }
             transactionSvcs.updateTransaction($scope.transaction)
                 .then(function (response) {

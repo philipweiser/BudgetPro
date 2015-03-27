@@ -75,6 +75,10 @@
     <!--Transaction-->
     <script src="Angular/Areas/transaction/transactionSvcs.js"></script>
     <script src="Angular/Areas/transaction/transactionController.js"></script>
+    <script src="Scripts/d3.js"></script>
+    <script src="Scripts/nv.d3.min.js"></script>
+    <script src="Scripts/angular-nvd3.min.js"></script>
+    <link href="Content/css/nv.d3.css" rel="stylesheet" />
     <!--END GLOBAL STYLES -->
     <!-- PAGE LEVEL STYLES -->
     <!-- END PAGE LEVEL  STYLES -->
@@ -96,23 +100,19 @@
         <!-- HEADER SECTION -->
         <div id="top" ng-controller="topbarController">
 
-            <nav class="navbar navbar-inverse navbar-fixed-top " style="padding-top: 10px;">
+            <nav class="navbar navbar-inverse navbar-fixed-top ">
                 <a data-original-title="Show/Hide Menu" data-placement="bottom" data-tooltip="tooltip" class="accordion-toggle btn btn-primary btn-sm visible-xs" data-toggle="collapse" href="#menu" id="menu-toggle">
                     <i class="icon-align-justify"></i>
                 </a>
                 <!-- LOGO SECTION -->
                 <header class="navbar-header">
-                    BudgetPro
-                    <!--<a href="index.html" class="navbar-brand">
-                    <img src="assets/img/logo.png" alt="" />
-
-                        </a>-->
+                    <img src="Content/img/name.png" style="max-height:53px; background-color:#f8f8f8"/>
                 </header>
                 <!-- END LOGO SECTION -->
                 <div class="nav navbar-top-links navbar-right">
-                    <input type="button" class="btn btn-primary" ui-sref="register" value="Register" ng-hide="authentication.isAuth" style="margin-right:20px">
-                    <input type="button" class="btn btn-primary" ui-sref="login" value="Login" ng-hide="authentication.isAuth" style="margin-right:20px" />
-                    <input type="button" class="btn btn-warning" value="Log out" ng-click="logout(); goLogin();" style="margin-right:20px" ng-show="authentication.isAuth" />
+                    <input type="button" class="btn btn-primary" ui-sref="register" value="Register" ng-hide="authentication.isAuth" style="margin-right:15px; margin-top:8px;">
+                    <input type="button" class="btn btn-primary" ui-sref="login" value="Login" ng-hide="authentication.isAuth" style="margin-right:65px; margin-top:8px;" />
+                    <input type="button" class="btn btn-primary" value="Log out" ng-click="logout(); goLogin();" style="margin-right:65px; margin-top:8px;" ng-show="authentication.isAuth" />
                     <!-- MESSAGES SECTION -->
                     <!--<li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -370,7 +370,7 @@
             </div>
             <br />
         </div>-->
-
+            
             <ul id="menu" ng-show="authentication.isAuth">
                 <li><a ui-sref="dashboard">Dashboard</a></li>
                 <li><a ui-sref="bank">Accounts</a></li>
@@ -380,13 +380,13 @@
                 <li><a ui-sref="budget">Budgets</a></li>
                 <!--<li><a ui-sref="category">Categories</a></li>-->
             </ul>
-
+            <img src="Content/img/logo.png" />
         </div>
         <!--END MENU SECTION -->
         <!--PAGE CONTENT -->
         <div id="content">
 
-            <div class="inner" style="min-height: 700px;" ui-view>
+            <div class="inner" style="min-height: 600px;" ui-view>
 
 
             </div>

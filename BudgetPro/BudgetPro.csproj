@@ -264,6 +264,8 @@
     <Content Include="Angular\Areas\topbar\topbar.html" />
     <Content Include="Angular\Areas\topbar\topbarController.js" />
     <Content Include="Angular\Areas\topbar\transactionSvcs.js" />
+    <Content Include="Content\img\logo.png" />
+    <Content Include="Content\img\name.png" />
     <Content Include="Content\nv.d3.css" />
     <Content Include="Content\nv.d3.min.css" />
     <Content Include="Scripts\angular-nvd3.js" />
@@ -3186,7 +3188,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\img\" />
     <Folder Include="Content\plugins\" />
   </ItemGroup>
   <ItemGroup>
