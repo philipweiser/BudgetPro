@@ -59,10 +59,10 @@
                     Authorize: "All"
                 }
             })
-        //.state('category', {
-        //    url: '/Categories',
-        //    templateUrl: '/Angular/Areas/categories/category.html',
-        //})
+        .state('category', {
+            url: '/Categories',
+            templateUrl: '/Angular/Areas/categories/category.html',
+        })
         $httpProvider.defaults.withCredentials = true;
         $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
 
@@ -79,30 +79,30 @@
 
         authService.fillAuthData();
 
-        $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-            //For later improved security
-            var authorized = false;
+        //$rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+        //    //For later improved security
+        //    var authorized = false;
 
-            if (toState.data.Authorize.indexOf("Anonymous") > -1)
-                authorized = true
-            else {
-                if (authService.authentication.isAuth) {
+        //    if (toState.data.Authorize.indexOf("Anonymous") > -1)
+        //        authorized = true
+        //    else {
+        //        if (authService.authentication.isAuth) {
 
-                    if (toState.data.Authorize.indexOf("All") > -1)
-                        authorized = true;
-                    else {
-                        angular.forEach(authService.authentication.Roles, function (value, key) {
-                            if (toState.Authorize.data.indexOf(value))
-                                authorized = true;
-                        });
-                    }
-                }
-            }
-            if (authorized == false) {
-                event.preventDefault();
-                authService.logout();
-                $state.go('login');
-            }
-        });
+        //            if (toState.data.Authorize.indexOf("All") > -1)
+        //                authorized = true;
+        //            else {
+        //                angular.forEach(authService.authentication.Roles, function (value, key) {
+        //                    if (toState.Authorize.data.indexOf(value))
+        //                        authorized = true;
+        //                });
+        //            }
+        //        }
+        //    }
+        //    if (authorized == false) {
+        //        event.preventDefault();
+        //        authService.logout();
+        //        $state.go('login');
+        //    }
+        //});
 
     }]);

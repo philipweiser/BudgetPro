@@ -14,8 +14,8 @@
                 </span>
 
                 <input type="email" class="form-control input-lg" ng-model="inviteEmail" placeholder="Invite User to Household" />
+                <input type="button" class="form-control btn-primary btn" value="Invite" ng-click="inviteToHousehold()" />
             </div>
-            <input type="button" class="form-control btn-primary btn" value="Invite" ng-click="inviteToHousehold()" />
         </div>
         <div class="col-sm-6" ng-show="gridHide">
             <div class="input-group input-group-md">
@@ -23,8 +23,8 @@
                     <i class="fa fa-user"></i>
                 </span>
                 <input type="text" id="newHouseName" class="form-control input-lg" ng-model="houseName" placeholder="New Household Name" />
+                <input type="button" class="form-control btn-primary" value="Create" ng-click="createHousehold()" />
             </div>
-            <input type="button" class="form-control btn-primary" value="Create" ng-click="createHousehold()" />
         </div>
         <div class="col-xs-6" style="margin-top:15px;" ng-hide="gridHide">
             <input type="button" class="form-control btn-danger" value="Leave Household" ng-click="leaveHousehold()" />

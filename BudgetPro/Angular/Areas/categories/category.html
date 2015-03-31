@@ -1,12 +1,21 @@
 ﻿<div ng-controller="categoryController">
-    This is the budget
-    {{budgetItem.Id}}
-    <input type="text" placeholder="Id" ng-model="category.Id" />
-    <input type="text" placeholder="Name" ng-model="category.Name" />
-    <div ui-grid="{ data: categories }" id="grid1" class="myGrid">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>Categories</h1>
+        </div>
+        <div class="col-md-8">
+            <div ui-grid="gridOptions" id="grid1" class="myGrid">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h2>Create New Category</h2><hr />
+            <div class="input-group input-group-md">
+                <span class="input-group-addon">
+                    <i class="fa fa-user"></i>
+                </span>
+                <input type="text" class="form-control input-lg" ng-model="category.Name" placeholder="New Category Name" />
+                <input type="button" class="form-control btn-primary" value="Create" ng-click="createCategory()" />
+            </div>
+        </div>
     </div>
-    <input type="button" ng-click="getCategories()" value="Get Categories" />
-    <input type="button" ng-click="createCategory()" value="Create Category" />
-    <input type="button" ng-click="deleteCategory()" value="Delete Category" />
-    <input type="button" ng-click="updateCategory()" value="Update Category" />
 </div>

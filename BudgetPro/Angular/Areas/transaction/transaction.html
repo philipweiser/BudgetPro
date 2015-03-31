@@ -15,18 +15,9 @@
                         <i class="fa fa-user"></i>
                     </span>
                     <input type="text" class="form-control input-lg" ng-model="transaction.Description" placeholder="Description" />
-                </div>
-                <div class="input-group input-group-md">
-                    <span class="input-group-addon">
-                        <i class="fa fa-user"></i>
-                    </span>
                     <input type="text" class="form-control input-lg" ng-model="CategoryName" typeahead="c.Name for c in categories" placeholder="Category" />
-                </div>
-                <div class="input-group input-group-md">
-                    <span class="input-group-addon">
-                        <i class="fa fa-user"></i>
-                    </span>
                     <input type="text" class="form-control input-lg" ng-model="transaction.Amount" placeholder="Amount" />
+                    <input type="button" class="form-control btn-primary btn" value="Create Transaction" ng-click="createTransaction()" />
                 </div>
             </div>
             <div class="col-sm-6">
@@ -37,7 +28,6 @@
         </div>
         <div class="col-sm-12">
             <div class="col-xs-6">
-                <input type="button" class="form-control btn-primary btn" value="Create Transaction" ng-click="createTransaction()" />
             </div>
             <div class="col-xs-6">
                 <input type="button" class="form-control btn-primary btn" value="Update Transaction" ng-click="updateTransaction()" />
