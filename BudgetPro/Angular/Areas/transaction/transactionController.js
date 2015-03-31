@@ -29,10 +29,10 @@
             name: '',
             width: '80', field: 'Id',
             cellTemplate: '<div class="ui-grid-cell-contents" title="Edit Transaction">' +
-                '<input type="button"  ng-click="grid.appScope.whichEdit(row.entity)" class="form-control btn btn-primary" value="Edit" /></div>',
+                '<input type="button"  ng-click="grid.appScope.whichEdit(row.entity)" value="Edit" class="btn btn-primary"/></div>',
             enableSorting: false,
             enableFiltering: false,
-            enableColumnMenu: false
+            enableColumnMenu: false,
             },
             {
                 name: ' ',
