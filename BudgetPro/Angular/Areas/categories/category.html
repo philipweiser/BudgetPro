@@ -7,16 +7,5 @@
         <div ui-grid="gridOptions" id="grid1" class="myGrid">
         </div>
     </div>
-    <div class="col-md-4">
-        <h2>Create New Category</h2><hr />
-        <div class="input-group input-group-md">
-            <span class="input-group-addon">
-                <i class="fa fa-user"></i>
-            </span>
-            <input type="text" class="form-control input-lg" ng-model="category.Name" placeholder="New Category Name" />
-            <input type="button" class="form-control btn-primary" value="Create" ng-click="createCategory()" />
-            <button class="btn btn-success howler" data-type="success" data-icon="fa fa-check-square-o">Success</button>
-
-        </div>
-    </div>
+    <input type="button" class="btn btn-primary" value="New Category" ng-click="newModal()"/>
 </div>

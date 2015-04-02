@@ -1,11 +1,10 @@
 ﻿angular.module('app')
     // Path: /
-    .controller('categoryController', ['$scope', '$state', '$stateParams', 'categorySvcs', function ($scope, $state, $stateParams, categorySvcs) {
+    .controller('categoryController', ['$scope', '$state', '$stateParams', 'categorySvcs', '$modal', function ($scope, $state, $stateParams, categorySvcs, $modal) {
         $scope.category = {
             Id: '',
             Name: ''
         };
-
         $scope.categories = '';
         $scope.columns = [{
             name: '',
@@ -41,6 +40,15 @@
         $scope.whichEdit = function (entity) {
             
         }
+        $scope.newModal = function () {
+            $scope.modalInstance = $modal.open({
+                templateUrl: '/Angular/Areas/categories/modal.html',
+                size: 'sm',
+                controller: 'ModalInstanceCtrl'
+            });
+
+        }
+
         $scope.getCategories = function () {
             categorySvcs.getCategories()
                 .then(function (response) {
@@ -67,3 +75,12 @@
         };
         $scope.getCategories();
     }])
+angular.module('app').controller('ModalInstanceCtrl', function ($scope, $modalInstance) {
+    $scope.ok = function () {
+        $modalInstance.close($scope.selected.item);
+    };
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+});

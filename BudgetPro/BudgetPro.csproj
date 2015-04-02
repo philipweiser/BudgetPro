@@ -261,7 +261,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
-    <Content Include="Angular\Areas\topbar\topbar.html" />
+    <Content Include="Angular\Areas\categories\modal.html" />
     <Content Include="Angular\Areas\topbar\topbarController.js" />
     <Content Include="Angular\Areas\topbar\transactionSvcs.js" />
     <Content Include="Content\canvas-admin-v1 - Copy\Documentation\components.html" />

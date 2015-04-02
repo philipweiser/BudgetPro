@@ -8,8 +8,6 @@
                 $scope.accounts = $scope.dashboard.MyAccounts;
                 $scope.transactions = $scope.dashboard.RecentTransactions;
                 $scope.budgetItems = $scope.dashboard.MyBudget;
-                console.log("bi");
-                console.log($scope.budgetItems);
                 $scope.makeBudget($scope.budgetItems);
                 } else {
                     $location.path("/Household");

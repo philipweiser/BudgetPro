@@ -26,10 +26,6 @@
     <script src="Scripts/angular-ui-router.min.js"></script>
     <script src="Scripts/angular-local-storage.min.js"></script>
     <script src="Scripts/angular-animate.min.js"></script>
-    <!--Js Plugins-->
-    <script src="Content/js/jquery-ui-1.9.2.custom.min.js"></script>
-    <script src="Content/js/jquery.magnific-popup.min.js"></script>
-    <script src="Content/js/howl.min.js"></script>
     <!--Ui Grid-->
     <link href="Content/css/ui-grid.css" rel="stylesheet" />
     <script src="Content/js/ui-grid.min.js"></script>
@@ -41,11 +37,10 @@
     <script src="Scripts/bootstrap.min.js"></script>
     <link href="Content/bootstrap.min.css" rel="stylesheet" />
     <!--CSS-->
-    <link href="Content/css/main.css" rel="stylesheet" />
     <link href="Content/css/font-awesome.min.css" rel="stylesheet" />
     <link href="Content/css/font-awesome-ie7.min.css" rel="stylesheet" />
-    <link href="Content/css/magnific-popup.css" rel="stylesheet" />
-    <link href="Content/css/jquery-ui-1.9.2.custom.css" rel="stylesheet" />
+    <link href="Content/css/main.css" rel="stylesheet" />
+    <link href="Content/Site.css" rel="stylesheet" />
     <!--Fonts-->
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,800italic,400,600,800" type="text/css">
     <!--Chart-->
@@ -79,10 +74,11 @@
     <!--Transaction-->
     <script src="Angular/Areas/transaction/transactionSvcs.js"></script>
     <script src="Angular/Areas/transaction/transactionController.js"></script>
+
+    <link href="Content/css/nv.d3.css" rel="stylesheet" />
     <script src="Scripts/d3.js"></script>
     <script src="Scripts/nv.d3.min.js"></script>
     <script src="Scripts/angular-nvd3.min.js"></script>
-    <link href="Content/css/nv.d3.css" rel="stylesheet" />
     <!--END GLOBAL STYLES -->
     <!-- PAGE LEVEL STYLES -->
     <!-- END PAGE LEVEL  STYLES -->
@@ -126,6 +122,9 @@
                 </li>
                 <li>
                     <input type="button" class="btn btn-primary" ui-sref="login" value="Login" ng-hide="authentication.isAuth" style="margin-right:65px; margin-top:8px;" />
+                </li>
+                <li>
+                    <input type="button" class="btn btn-primary" value="My Account" ng-click="goProfile()" style="margin-right:10px; margin-top:8px;" ng-show="authentication.isAuth" />
                 </li>
                 <li>
                     <input type="button" class="btn btn-primary" value="Log out" ng-click="logout(); goLogin();" style="margin-right:65px; margin-top:8px;" ng-show="authentication.isAuth" />

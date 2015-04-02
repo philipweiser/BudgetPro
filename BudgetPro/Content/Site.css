@@ -1,34 +1,24 @@
-﻿@font-face {
-    font-family: 'ui-grid';
-    src: url('../fonts/ui-grid.woff') format('woff');
+﻿.input-group-addon{
+    background-color:#222;
 }
-@font-face {
-    font-family: 'ui-grid';
-    src: url('../fonts/ui-grid.eot') format('embedded-opentype');
+.modal.fade .modal-dialog {
+      -webkit-transform: translate(0, 0);
+      -ms-transform: translate(0, 0); // IE9 only
+          transform: translate(0, 0);
+
+ }
+html {
+  height: 100%;
 }
-.input-group{
-    margin-bottom:5px;
-    margin-top:5px;
-}
+
 body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-    font-size:18px;
+  min-height: 100%;
 }
-#content{
-    width:80%;
+
+.modal-backdrop {
+  bottom: 0;
 }
-@media (min-width: 992px) {
-    #content {
-        width: calc(100% - 220px);
-    }
-}
-@media (min-width: 992px) {
-  #content {
-    width: 80%;
-    margin: 0 !important;
-  }
-}
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;

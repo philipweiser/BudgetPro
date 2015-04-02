@@ -48,10 +48,13 @@
                     Authorize: "All"
                 }
             })
-            //.state('userprofile', {
-            //    url: '/Profile',
-            //    templateUrl: '/Angular/Areas/accounts/views/userprofile.html',
-            //})
+            .state('profile', {
+                url: '/Profile',
+                templateUrl: '/Angular/Areas/accounts/views/userprofile.html',
+                data: {
+                    Authorize: "All"
+                }
+            })
             .state('budget', {
                 url: '/Budget',
                 templateUrl: '/Angular/Areas/budget/budget.html',

@@ -7,4 +7,7 @@
         $scope.goLogin = function () {
             $location.path("/login");
         }
+        $scope.goProfile = function () {
+            $location.path("/Profile");
+        }
     }])
