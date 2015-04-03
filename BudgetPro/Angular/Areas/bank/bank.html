@@ -11,25 +11,8 @@
             <div ui-grid="gridOptions" id="grid1" class="myGrid">
             </div>
         </div>
-        <div class="col-sm-3">
-            <h2>Create Account</h2>
-            <div class="input-group input-group-md">
-                <span class="input-group-addon">
-                    <i class="fa fa-user"></i>
-                </span>
-                <input type="text" ng-model="newBankName" placeholder="Account Name" class="form-control input-lg" />
-            </div>
-            <input type="button" class="form-control btn-primary" value="Create" ng-click="createBank()" />
-        </div>
-        <div class="col-sm-3">
-            <h2>Edit Account</h2>
-            <div class="input-group input-group-md">
-                <span class="input-group-addon">
-                    <i class="fa fa-user"></i>
-                </span>
-                <input type="text" ng-model="editBank.Name" placeholder="Account Name" class="form-control input-lg" />
-            </div>
-            <input type="button" class="form-control btn-primary" value="Submit Changes" ng-click="editBankSubmit()" />
+        <div class="col-md-4">
+            <input type="button" class="btn btn-primary" value="Add an Account" ng-click="newModal()" />
         </div>
     </div>
 </div>

@@ -1,10 +1,12 @@
 ﻿angular.module('app')
     // Path: /
     .controller('budgetController', ['$scope', '$state', '$stateParams', 'budgetItemSvcs', 'categorySvcs', '$location', function ($scope, $state, $stateParams, budgetItemSvcs, categorySvcs, $location) {
+        $scope.budgetItems = [];
         $scope.getBudget = function () {
             budgetItemSvcs.getBudget()
                 .then(function (response) {
-                    if (response.data != null) {
+                    console.log(response);
+                    if (response.data != undefined) {
                         $scope.budgetItems = response.data;
                     } else {
                         $location.path("/Household");
@@ -57,8 +59,6 @@
             paginationPageSize: 10,
             enablePaginationControls: true,
         };
-        $scope.budgetItems = [];
-
         $scope.getCategories = function () {
             categorySvcs.getCategories().then(function (response) {
                 $scope.categories = response;

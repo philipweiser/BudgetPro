@@ -10,7 +10,7 @@
             name: '',
             width: '80', field: 'Id',
             cellTemplate: '<div class="ui-grid-cell-contents" title="Edit Transaction">' +
-                '<input type="button"  ng-click="grid.appScope.whichEdit(row.entity)" class="form-control btn btn-primary" value="Edit" /></div>',
+                '<input type="button"  ng-click="grid.appScope.editModal(row.entity)" class="form-control btn btn-primary" value="Edit" /></div>',
             enableSorting: false,
             enableFiltering: false,
             enableColumnMenu: false
@@ -37,18 +37,39 @@
             paginationPageSize: 10,
             enablePaginationControls: true,
         }
-        $scope.whichEdit = function (entity) {
-            
-        }
         $scope.newModal = function () {
             $scope.modalInstance = $modal.open({
-                templateUrl: '/Angular/Areas/categories/modal.html',
+                templateUrl: '/Angular/Areas/categories/createModal.html',
                 size: 'sm',
-                controller: 'ModalInstanceCtrl'
+                controller: 'newCategoryModalController',
             });
-
-        }
-
+            $scope.modalInstance.result.then(function (response) {
+                if (response != undefined) {
+                    $scope.Name = response;
+                    $scope.createCategory();
+                }
+            }
+        )
+        };
+        $scope.editModal = function (entity) {
+            $scope.modalInstance = $modal.open({
+                templateUrl: '/Angular/Areas/categories/editModal.html',
+                size: 'sm',
+                controller: 'editCategoryModalController',
+                resolve: {
+                    entity: function () {
+                        return entity;
+                    }
+                }
+            });
+            $scope.modalInstance.result.then(function (response) {
+                if (response != undefined) {
+                    $scope.category = response;
+                    $scope.updateCategory();
+                }
+            }
+        )
+        };
         $scope.getCategories = function () {
             categorySvcs.getCategories()
                 .then(function (response) {
@@ -75,11 +96,21 @@
         };
         $scope.getCategories();
     }])
-angular.module('app').controller('ModalInstanceCtrl', function ($scope, $modalInstance) {
+angular.module('app').controller('newCategoryModalController', function ($scope, $modalInstance) {
     $scope.ok = function () {
-        $modalInstance.close($scope.selected.item);
+        if($scope.Name != undefined)
+            $modalInstance.close($scope.Name);
     };
-
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+});
+angular.module('app').controller('editCategoryModalController', function ($scope, $modalInstance, entity) {
+    $scope.entity = entity;
+    $scope.ok = function () {
+        if ($scope.entity != undefined)
+            $modalInstance.close($scope.entity);
+    };
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
     };
