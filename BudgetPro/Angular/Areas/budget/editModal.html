@@ -1,0 +1,20 @@
+﻿<div class="modal-header">
+    <h3 class="modal-title">Edit Budget Item</h3>
+</div>
+<div class="modal-body">
+    <div class="input-group input-group-md">
+        <span class="input-group-addon">
+            <i class="fa fa-user"></i>
+        </span>
+        <input type="text" class="form-control input-lg" ng-model="budgetItem.Description" placeholder="Description" />
+        <select class="form-control input-lg" ng-options="c.Name for c in categories" ng-model="budgetItem.CategoryName"><option value="" disabled class="text-muted">Choose a Category</option></select>
+        <input type="text" class="form-control input-lg" ng-model="budgetItem.Amount" placeholder="Amount" />
+        <input type="text" class="form-control input-lg" ng-model="budgetItem.Frequency" placeholder="Frequency"/>
+    </div>
+
+    <label><input type="checkbox" class="form-control anim-checkbox" ng-model="isDebit">Debit</label>
+    </div>
+<div class="modal-footer">
+    <input type="button" class="btn btn-primary" value="Submit" ng-click="ok()" />
+    <input type="button" class="btn btn-warning" ng-click="cancel()" value="Cancel"/>
+</div>

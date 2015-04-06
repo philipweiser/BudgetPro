@@ -263,10 +263,14 @@
     <Compile Include="Results\ChallengeResult.cs" />
     <Content Include="Angular\Areas\bank\createModal.html" />
     <Content Include="Angular\Areas\bank\editModal.html" />
+    <Content Include="Angular\Areas\budget\createModal.html" />
+    <Content Include="Angular\Areas\budget\editModal.html" />
     <Content Include="Angular\Areas\categories\editModal.html" />
     <Content Include="Angular\Areas\categories\createModal.html" />
     <Content Include="Angular\Areas\topbar\topbarController.js" />
     <Content Include="Angular\Areas\topbar\transactionSvcs.js" />
+    <Content Include="Angular\Areas\transaction\createModal.html" />
+    <Content Include="Angular\Areas\transaction\editModal.html" />
     <Content Include="Content\canvas-admin-v1 - Copy\Documentation\components.html" />
     <Content Include="Content\canvas-admin-v1 - Copy\Documentation\css\bootstrap.css" />
     <Content Include="Content\canvas-admin-v1 - Copy\Documentation\css\docs.css" />
