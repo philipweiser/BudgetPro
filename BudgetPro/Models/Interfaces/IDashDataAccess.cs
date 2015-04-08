@@ -21,5 +21,7 @@ namespace BudgetPro.Models.Database
         Task<DashModel> GetDashModel(int Id);
 
         Task<List<TransModel>> GetRecentTransactionsAsync(int HouseholdId);
+
+        Task<List<object>> GetGraphData(int HouseholdId);
     }
 }
