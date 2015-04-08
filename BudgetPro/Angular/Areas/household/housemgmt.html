@@ -1,13 +1,13 @@
 ﻿<div ng-controller="housemgmtController">
     <div id="content-header">
-        <h1>Household</h1><hr />
-        </div>
+        <h1>Household</h1>
+    </div>
+    <div class="col-xs-12">
         {{message}}
         <div ng-hide="gridHide">
             <div ui-grid=gridOptions id="grid1" class="houseGrid">
             </div>
         </div>
-        <div class="row">
             <div class="col-xs-2"></div>
             <div class="col-sm-4" ng-hide="gridHide" style="margin-top:10px">
                 <div class="input-group input-group-md">

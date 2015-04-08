@@ -3,7 +3,7 @@
         .controller('registerController', ['$scope', '$location', '$timeout', 'authService', function ($scope, $location, $timeout, authService) {
 
             $scope.savedSuccessfully = false;
-            $scope.message = "Register a new account";
+            $scope.message = "";
             $scope.isError = false;
 
             $scope.registerData = {

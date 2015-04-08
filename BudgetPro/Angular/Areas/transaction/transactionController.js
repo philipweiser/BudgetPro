@@ -1,6 +1,6 @@
 ﻿angular.module('app')
     // Path: /
-    .controller('transactionController', ['$scope', '$state', '$stateParams', 'transactionSvcs', 'categorySvcs', 'bankSvcs', '$location', function ($scope, $state, $stateParams, transactionSvcs, categorySvcs, bankSvcs, $location) {
+    .controller('transactionController', ['$scope', '$state', '$stateParams', 'transactionSvcs', 'categorySvcs', 'bankSvcs', '$location', '$modal', function ($scope, $state, $stateParams, transactionSvcs, categorySvcs, bankSvcs, $location, $modal) {
         $scope.transaction = {
             Id: '',
             AccountId: '',
@@ -25,15 +25,62 @@
                 $location.path("/Household");
             }
         });
+        $scope.newModal = function () {
+            $scope.resetFields();
+            $scope.transaction.Debit = true;
+            $scope.transaction.CategoryName = $scope.CategoryName;
+            $scope.modalInstance = $modal.open({
+                templateUrl: '/Angular/Areas/transaction/createModal.html',
+                size: 'sm',
+                controller: 'newTransactionModalController',
+                resolve: {
+                    entity: function () {
+                        return $scope.transaction;
+                    },
+                    categories: function () {
+                        return $scope.categories;
+                    },
+                }
+            });
+            $scope.modalInstance.result.then(function (response) {
+                if (response != undefined) {
+                    $scope.transaction = response;
+                    $scope.createTransaction();
+                }
+            }
+        )
+        };
+        $scope.editModal = function (entity) {
+            $scope.modalInstance = $modal.open({
+                templateUrl: '/Angular/Areas/transaction/editModal.html',
+                size: 'sm',
+                controller: 'editTransactionModalController',
+                resolve: {
+                    entity: function () {
+                        return entity;
+                    },
+                    categories: function () {
+                        return $scope.categories;
+                    }
+                }
+            });
+            $scope.modalInstance.result.then(function (response) {
+                if (response != undefined) {
+                    $scope.transaction = response;
+                    $scope.updateTransaction();
+                }
+            }
+        )
+        };
         $scope.columns = [{
             name: '',
             width: '80', field: 'Id',
             cellTemplate: '<div class="ui-grid-cell-contents" title="Edit Transaction">' +
-                '<input type="button"  ng-click="grid.appScope.whichEdit(row.entity)" value="Edit" class="btn btn-primary"/></div>',
+                '<input type="button"  ng-click="grid.appScope.editModal(row.entity)" value="Edit" class="btn btn-primary"/></div>',
             enableSorting: false,
             enableFiltering: false,
             enableColumnMenu: false,
-            },
+        },
             {
                 name: ' ',
                 width: '80', field: 'Id',
@@ -49,16 +96,7 @@
             { name: 'ReconciledAmount', cellFilter: 'currency' },
             { name: 'Date', cellFilter: 'date' },
         ];
-        $scope.debitCredit = function(){
-            $scope.transaction.Amount = - $scope.transaction.Amount;
-            $scope.transaction.ReconciledAmount = - $scope.transaction.ReconciledAmount;
-        }
-        $scope.whichEdit = function (entity) {
-            $scope.transaction = entity;
-            $scope.transaction.Amount == $scope.transaction.ReconciledAmount ? $scope.transaction.ReconciledTF = true : $scope.transaction.ReconciledTF = false;
-            $scope.CategoryName = entity.CategoryName;
-            $scope.transaction.Amount > 0 ? $scope.transaction.Debit = false : $scope.transaction.Debit = true;
-        }
+        $scope.hideNew = true;
         $scope.gridOptions = {
             data: 'transactions',
             columnDefs: $scope.columns,
@@ -67,6 +105,16 @@
             paginationPageSize: 10,
             enablePaginationControls: true,
         };
+        $scope.getCategories = function () {
+            return categorySvcs.getCategories()
+                .then(function (response) {
+                    if (response != null) {
+                        $scope.categories = response;
+                    } else {
+                        $location.path("/Household");
+                    }
+                })
+        }
         $scope.getTransactions = function () {
             $scope.transactions = [];
             $scope.gridOptions.data = [];
@@ -76,20 +124,9 @@
                     $scope.transactions = response;
                 });
         };
-        $scope.getCategories = function () {
-            return categorySvcs.getCategories()
-                .then(function (response) {
-                    if (response != null) {
-                    $scope.categories = response.data;
-                    } else {
-                        $location.path("/Household");
-                    }
-                })
-        }
         $scope.createTransaction = function () {
             if ($scope.transaction.ReconciledTF)
                 $scope.transaction.ReconciledAmount = $scope.transaction.Amount;
-            $scope.transaction.CategoryName = $scope.CategoryName;
             if ($scope.transaction.Debit) {
                 $scope.transaction.Amount = -Math.abs($scope.transaction.Amount);
                 $scope.transaction.ReconciledAmount = -Math.abs($scope.transaction.ReconciledAmount);
@@ -99,7 +136,6 @@
             }
             transactionSvcs.createTransaction($scope.transaction)
                 .then(function (response) {
-                    $scope.resetFields();
                     $scope.getTransactions();
                 });
         };
@@ -107,7 +143,6 @@
             transactionSvcs.deleteTransaction(id)
                 .then(function (response) {
                     $scope.getTransactions();
-                    $scope.resetFields();
                 });
         };
         $scope.updateTransaction = function () {
@@ -125,19 +160,50 @@
             transactionSvcs.updateTransaction($scope.transaction)
                 .then(function (response) {
                     $scope.getTransactions();
-                    $scope.resetFields();
                 });
         };
-        $scope.accountSelected = function () {
-            $scope.resetFields();
-            $scope.transaction.AccountId = $scope.AccountName.Id;
-            $scope.transaction.AccountName = $scope.AccountName.Name;
-            $scope.getTransactions();
-        }
         $scope.resetFields = function () {
             $scope.transaction.Amount = '';
             $scope.transaction.Description = '';
             $scope.CategoryName = '';
             $scope.transaction.CategoryName = '';
+            $scope.transaction.CategoryId = '';
+            $scope.transaction.ReconciledTF = '';
         }
+        $scope.accountSelected = function () {
+            $scope.transaction.AccountId = $scope.AccountName.Id;
+            $scope.transaction.AccountName = $scope.AccountName.Name;
+            $scope.hideNew = false;
+            $scope.getTransactions();
+        }
+
+        
     }])
+angular.module('app').controller('newTransactionModalController', function ($scope, $modalInstance, entity, categories) {
+    $scope.entity = entity;
+    $scope.categories = categories;
+    $scope.formCompleted = false;
+
+    $scope.ok = function () {
+        if ($scope.entity.Description != '' &&
+            $scope.entity.Amount != '' &&
+            $scope.entity.CategoryId != '')
+            $scope.formCompleted = true;
+        if ($scope.formCompleted)
+            $modalInstance.close($scope.entity);
+    };
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+});
+angular.module('app').controller('editTransactionModalController', function ($scope, $modalInstance, entity, categories) {
+    $scope.entity = entity;
+    $scope.categories = categories;
+    $scope.ok = function () {
+        if ($scope.entity != undefined)
+            $modalInstance.close($scope.entity);
+    };
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+});

@@ -63,21 +63,18 @@
             budgetItemSvcs.createBudgetItem($scope.budgetItem)
                 .then(function (response) {
                     $scope.getBudget();
-                    $scope.resetFields();
                 });
         };
         $scope.deleteBudgetItem = function (id) {
             budgetItemSvcs.deleteBudgetItem(id)
                 .then(function (response) {
                     $scope.getBudget();
-                    $scope.resetFields();
                 });
         };
         $scope.updateBudgetItem = function () {
             budgetItemSvcs.updateBudgetItem($scope.budgetItem)
                 .then(function (response) {
                     $scope.getBudget();
-                    $scope.resetFields();
                 });
         };
         $scope.getCategories();

@@ -1,15 +1,19 @@
 ﻿<div class="modal-header">
-    <h3 class="modal-title">Create New Category</h3>
+    <h3 class="modal-title">New Transaction</h3>
 </div>
 <div class="modal-body">
     <div class="input-group input-group-md">
         <span class="input-group-addon">
             <i class="fa fa-user"></i>
         </span>
-        <input type="text" class="form-control input-lg" ng-model="Name" placeholder="New Category Name" />
+        <input type="text" class="form-control input-lg" ng-model="entity.Description" placeholder="Description" />
+        <select class="form-control input-lg" ng-options="c.Id as c.Name for c in categories" ng-model="entity.CategoryId"><option value="" disabled class="text-muted">Choose a Category</option></select>
+        <input type="text" class="form-control input-lg" ng-model="entity.Amount" placeholder="Amount" />
+        <label>Reconciled<input type="checkbox" class="form-control anim-checkbox" ng-model="entity.ReconciledTF" /></label>
+        <label>Debit<input type="checkbox" class="form-control anim-checkbox" ng-model="entity.Debit" /></label>
     </div>
     </div>
 <div class="modal-footer">
-    <input type="button" class="form-control btn-primary" value="Create" ng-click="ok()" />
+    <input type="button" class="btn btn-primary" value="Create" ng-click="ok()" />
     <input type="button" class="btn btn-warning" ng-click="cancel()" value="Cancel"/>
 </div>

@@ -3,9 +3,11 @@
     <div id="content-header">
         <h1>Categories</h1>
     </div>
-    <div class="col-md-8">
-        <div ui-grid="gridOptions" id="grid1" class="myGrid">
+    <div class="col-xs-12">
+        <div class="col-md-8">
+            <div ui-grid="gridOptions" id="grid1" class="myGrid">
+            </div>
         </div>
+        <input type="button" class="btn btn-primary" value="New Category" ng-click="newModal()" />
     </div>
-    <input type="button" class="btn btn-primary" value="New Category" ng-click="newModal()"/>
 </div>

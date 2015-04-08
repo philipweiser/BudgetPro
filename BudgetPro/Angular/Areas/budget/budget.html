@@ -1,16 +1,14 @@
 ﻿<div id="content-header">
     <h1>Budget</h1>
 </div>
-<div ng-controller="budgetController">
-    <div class="row" style="margin-bottom:10px">
+<div class="col-xs-12">
+    <div ng-controller="budgetController">
         <div class="col-sm-12">
             <div ui-grid="gridOptions" ui-grid-pagination id="grid1" class="myGrid">
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-6">
-            <input type="button" class="form-control btn-primary btn" value="New Budget Item" ng-click="newModal()" style="margin-bottom:8px;margin-top:5px;"/>
-        </div>
+    <div class="col-sm-6">
+        <input type="button" class="form-control btn-primary btn" value="New Budget Item" ng-click="newModal()" style="margin-bottom:8px;margin-top:5px;" />
     </div>
 </div>
