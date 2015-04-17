@@ -1,6 +1,6 @@
 ﻿angular.module('app')
     // Path: /
-    .controller('accmgmtController', ['$scope', '$state', '$stateParams', 'bankSvcs', '$location', '$modal', function ($scope, $state, $stateParams, bankSvcs, $location, $modal) {
+    .controller('accmgmtController', ['$scope', '$state', '$stateParams', 'bankSvcs', '$location', '$modal', 'notifySvcs', function ($scope, $state, $stateParams, bankSvcs, $location, $modal, notifySvcs) {
         $scope.getBanks = function () {
             bankSvcs.getBanks().then(function (response) {
                 if (response.data != null) {
@@ -23,6 +23,7 @@
         };
         $scope.gridOptions = {
             data: 'banks',
+            minRowsToShow:'10',
             columnDefs: [
                 {
                     name: '',
@@ -31,7 +32,7 @@
                         '<input type="button"  ng-click="grid.appScope.editModal(row.entity)" class="form-control btn btn-primary" value="Edit" /></div>',
                     enableSorting: false,
                     enableFiltering: false,
-                    enableColumnMenu: false
+                    enableColumnMenu: false,
                 },
                 {
                     name: ' ',
@@ -51,17 +52,26 @@
             bankSvcs.createBank($scope.newBankName).then(function (response) {
                 $scope.getBanks();
                 $scope.newBankName = '';
+                if (response.status = 200) {
+                    notifySvcs.success("Changes Saved.");
+                }
             });
         }
         $scope.deleteBank = function (id) {
             bankSvcs.deleteBank(id).then(function (response) {
                 $scope.getBanks();
+                if (response.status = 200) {
+                    notifySvcs.success("Changes Saved.");
+                }
             });
         }
         $scope.editBankSubmit = function () {
             bankSvcs.updateBank($scope.editBank).then(function (response) {
                 $scope.getBanks();
                 $scope.editBank.Name = '';
+                if (response.status = 200) {
+                    notifySvcs.success("Changes Saved.");
+                }
             });
         }
         $scope.newModal = function () {

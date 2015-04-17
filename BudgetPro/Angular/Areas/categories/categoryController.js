@@ -1,6 +1,6 @@
 ﻿angular.module('app')
     // Path: /
-    .controller('categoryController', ['$scope', '$state', '$stateParams', 'categorySvcs', '$modal', function ($scope, $state, $stateParams, categorySvcs, $modal) {
+    .controller('categoryController', ['$scope', '$state', '$stateParams', 'categorySvcs', '$modal', 'notifySvcs', function ($scope, $state, $stateParams, categorySvcs, $modal, notifySvcs) {
         $scope.category = {
             Id: '',
             Name: ''
@@ -32,6 +32,7 @@
         $scope.gridOptions = {
             data: 'categories',
             columnDefs: $scope.columns,
+            minRowsToShow: '10',
             enableFiltering: true,
             paginationPageSizes: [10, 20, 50],
             paginationPageSize: 10,
@@ -80,18 +81,27 @@
             categorySvcs.createCategory($scope.category)
                 .then(function (response) {
                     $scope.getCategories();
+                    if (response.status = 200) {
+                        notifySvcs.success("Changes Saved.");
+                    }
                 });
         };
         $scope.deleteCategory = function (id) {
             categorySvcs.deleteCategory(id)
                 .then(function (response) {
                     $scope.getCategories();
+                    if (response.status = 200) {
+                        notifySvcs.success("Changes Saved.");
+                    }
                 });
         };
         $scope.updateCategory = function () {
             categorySvcs.updateCategory($scope.category)
                 .then(function (response) {
                     $scope.getCategories();
+                    if (response.status = 200) {
+                        notifySvcs.success("Changes Saved.");
+                    }
                 });
         };
         $scope.getCategories();

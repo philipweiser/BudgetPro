@@ -1,5 +1,5 @@
-﻿angular.module('app', ['ui.router', 'ui.bootstrap', 'LocalStorageModule', 'ui.grid', 'ui.grid.pagination', 'nvd3'])
-    .config(['$stateProvider', '$locationProvider', '$urlRouterProvider', '$httpProvider', function ($stateProvider, $locationProvider, $urlRouterProvider, $httpProvider) {
+﻿angular.module('app', ['ui.router', 'ui.bootstrap', 'LocalStorageModule', 'ui.grid', 'ui.grid.pagination', 'nvd3', 'ui-notification'])
+    .config(['$stateProvider', '$locationProvider', '$urlRouterProvider', '$httpProvider', function ($stateProvider, $locationProvider, $urlRouterProvider, $httpProvider, Notification) {
         // UI States, URL Routing & Mapping. For more info see: https://github.com/angular-ui/ui-router
         // ------------------------------------------------------------------------------------------------------------
 
@@ -65,6 +65,9 @@
         .state('category', {
             url: '/Categories',
             templateUrl: '/Angular/Areas/categories/category.html',
+            data: {
+                Authorize:"All"
+            }
         })
         $httpProvider.defaults.withCredentials = true;
         $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
@@ -82,30 +85,30 @@
 
         authService.fillAuthData();
 
-        //$rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-        //    //For later improved security
-        //    var authorized = false;
+        $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+            //For later improved security
+            var authorized = false;
 
-        //    if (toState.data.Authorize.indexOf("Anonymous") > -1)
-        //        authorized = true
-        //    else {
-        //        if (authService.authentication.isAuth) {
+            if (toState.data.Authorize.indexOf("Anonymous") > -1)
+                authorized = true
+            else {
+                if (authService.authentication.isAuth) {
 
-        //            if (toState.data.Authorize.indexOf("All") > -1)
-        //                authorized = true;
-        //            else {
-        //                angular.forEach(authService.authentication.Roles, function (value, key) {
-        //                    if (toState.Authorize.data.indexOf(value))
-        //                        authorized = true;
-        //                });
-        //            }
-        //        }
-        //    }
-        //    if (authorized == false) {
-        //        event.preventDefault();
-        //        authService.logout();
-        //        $state.go('login');
-        //    }
-        //});
+                    if (toState.data.Authorize.indexOf("All") > -1)
+                        authorized = true;
+                    else {
+                        angular.forEach(authService.authentication.Roles, function (value, key) {
+                            if (toState.Authorize.data.indexOf(value))
+                                authorized = true;
+                        });
+                    }
+                }
+            }
+            if (authorized == false) {
+                event.preventDefault();
+                authService.logout();
+                $state.go('login');
+            }
+        });
 
     }]);

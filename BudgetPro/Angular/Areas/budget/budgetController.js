@@ -1,6 +1,6 @@
 ﻿angular.module('app')
     // Path: /
-    .controller('budgetController', ['$scope', '$state', '$stateParams', 'budgetItemSvcs', 'categorySvcs', '$location', '$modal', function ($scope, $state, $stateParams, budgetItemSvcs, categorySvcs, $location, $modal) {
+    .controller('budgetController', ['$scope', '$state', '$stateParams', 'budgetItemSvcs', 'categorySvcs', '$location', '$modal', 'notifySvcs', function ($scope, $state, $stateParams, budgetItemSvcs, categorySvcs, $location, $modal, notifySvcs) {
         $scope.budgetItems = [];
         $scope.getBudget = function () {
             budgetItemSvcs.getBudget()
@@ -49,6 +49,7 @@
         $scope.gridOptions = {
             data: 'budgetItems',
             columnDefs: $scope.columns,
+            minRowsToShow:'10',
             enableFiltering: true,
             paginationPageSizes: [10, 20, 50],
             paginationPageSize: 10,
@@ -63,18 +64,27 @@
             budgetItemSvcs.createBudgetItem($scope.budgetItem)
                 .then(function (response) {
                     $scope.getBudget();
+                    if (response.status = 200) {
+                        notifySvcs.success("Changes Saved.");
+                    }
                 });
         };
         $scope.deleteBudgetItem = function (id) {
             budgetItemSvcs.deleteBudgetItem(id)
                 .then(function (response) {
                     $scope.getBudget();
+                    if (response.status = 200) {
+                        notifySvcs.success("Changes Saved.");
+                    }
                 });
         };
         $scope.updateBudgetItem = function () {
             budgetItemSvcs.updateBudgetItem($scope.budgetItem)
                 .then(function (response) {
                     $scope.getBudget();
+                    if (response.status = 200) {
+                        notifySvcs.success("Changes Saved.");
+                    }
                 });
         };
         $scope.getCategories();

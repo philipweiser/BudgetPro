@@ -261,6 +261,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
+    <Content Include="angular-ui-notification.html" />
+    <Content Include="Angular\Areas\accounts\views\changePassword.html" />
     <Content Include="Angular\Areas\bank\createModal.html" />
     <Content Include="Angular\Areas\bank\editModal.html" />
     <Content Include="Angular\Areas\budget\createModal.html" />
@@ -271,6 +273,7 @@
     <Content Include="Angular\Areas\topbar\transactionSvcs.js" />
     <Content Include="Angular\Areas\transaction\createModal.html" />
     <Content Include="Angular\Areas\transaction\editModal.html" />
+    <Content Include="Angular\global\services\notifySvcs.js" />
     <Content Include="Content\canvas-admin-v1 - Copy\Documentation\components.html" />
     <Content Include="Content\canvas-admin-v1 - Copy\Documentation\css\bootstrap.css" />
     <Content Include="Content\canvas-admin-v1 - Copy\Documentation\css\docs.css" />
@@ -301,6 +304,7 @@
     <Content Include="Content\canvas-admin-v1 - Copy\Theme\chart-flot.html" />
     <Content Include="Content\canvas-admin-v1 - Copy\Theme\chart-morris.html" />
     <Content Include="Content\canvas-admin-v1 - Copy\Theme\chart-sparkline.html" />
+    <Content Include="Content\css\angular-ui-notification.min.css" />
     <Content Include="Content\css\blue.css" />
     <Content Include="Content\css\main.css" />
     <Content Include="Content\css\Login.css" />
@@ -578,7 +582,9 @@
     <Content Include="Content\nv.d3.min.css" />
     <Content Include="Scripts\angular-nvd3.js" />
     <Content Include="Scripts\angular-nvd3.min.js" />
+    <Content Include="Scripts\angular-ui-notification.js" />
     <Content Include="Scripts\d3\d3.js" />
+    <Content Include="Scripts\d3\d3.layout.js" />
     <Content Include="Scripts\d3\d3.min.js" />
     <Content Include="Scripts\nv.d3.min.js" />
     <Content Include="Scripts\ReusableChart.js" />

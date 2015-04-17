@@ -23,6 +23,7 @@ namespace BudgetPro.Models
         public List<TransModel> RecentTransactions { get; set; }
         public List<BankModel> MyAccounts { get; set; }
         public List<BudgetItem> MyBudget { get; set; }
+        public List<object> MyGraph { get; set; }
     }
     public class HouseModel
     {

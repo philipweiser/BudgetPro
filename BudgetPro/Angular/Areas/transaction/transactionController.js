@@ -1,6 +1,6 @@
 ﻿angular.module('app')
     // Path: /
-    .controller('transactionController', ['$scope', '$state', '$stateParams', 'transactionSvcs', 'categorySvcs', 'bankSvcs', '$location', '$modal', function ($scope, $state, $stateParams, transactionSvcs, categorySvcs, bankSvcs, $location, $modal) {
+    .controller('transactionController', ['$scope', '$state', '$stateParams', 'transactionSvcs', 'categorySvcs', 'bankSvcs', '$location', '$modal', 'notifySvcs', function ($scope, $state, $stateParams, transactionSvcs, categorySvcs, bankSvcs, $location, $modal, notifySvcs) {
         $scope.transaction = {
             Id: '',
             AccountId: '',
@@ -100,6 +100,7 @@
         $scope.gridOptions = {
             data: 'transactions',
             columnDefs: $scope.columns,
+            minRowsToShow: '13',
             enableFiltering: true,
             paginationPageSizes: [10, 20, 50],
             paginationPageSize: 10,
@@ -137,12 +138,18 @@
             transactionSvcs.createTransaction($scope.transaction)
                 .then(function (response) {
                     $scope.getTransactions();
+                    if (response.status = 200) {
+                        notifySvcs.success("Changes Saved.");
+                    }
                 });
         };
         $scope.deleteTransaction = function (id) {
             transactionSvcs.deleteTransaction(id)
                 .then(function (response) {
                     $scope.getTransactions();
+                    if (response.status = 200) {
+                        notifySvcs.success("Changes Saved.");
+                    }
                 });
         };
         $scope.updateTransaction = function () {
@@ -160,6 +167,9 @@
             transactionSvcs.updateTransaction($scope.transaction)
                 .then(function (response) {
                     $scope.getTransactions();
+                    if (response.status = 200) {
+                        notifySvcs.success("Changes Saved.");
+                    }
                 });
         };
         $scope.resetFields = function () {

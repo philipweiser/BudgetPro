@@ -3,18 +3,17 @@
         <h1>Dashboard</h1>
     </div>
     <div class="col-xs-12">
-        <div class="col-md-4 column">
-            <div class="row">
-                <div class="col-md-12 column">
+
+        <div class="row">
+            <div class="col-xs-4">
+                <div class="col-md-6 column">
                     <h2>Accounts</h2>
                     <div ng-repeat=" account in accounts">
                         {{account.Name}}
                         {{account.Balance | currency}}
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12 column">
+                <div class="col-md-6 column">
                     <h2>Recent Transactions</h2>
                     <div ng-repeat="transaction in transactions">
                         {{transaction.Date | date}}
@@ -24,12 +23,18 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-8 column">
-            <form>
-                <label><input type="radio" name="mode" value="grouped"> Grouped</label>
-                <label><input type="radio" name="mode" value="stacked" checked> Stacked</label>
-            </form>
+            <div class="col-md-8 column">
+                <style>
+                    #chart svg {
+                        height: 400px;
+                    }
+                </style>
+
+
+                <div id="chart">
+                    <svg></svg>
+                </div>
+            </div>
         </div>
     </div>
 </div>

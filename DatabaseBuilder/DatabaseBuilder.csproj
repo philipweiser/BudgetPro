@@ -131,6 +131,8 @@
     <EmbeddedResource Include="SQL\GetInvitationForUser.sql" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="SQL\fnSumTransactions.sql" />
+    <EmbeddedResource Include="SQL\fnSumBudget.sql" />
     <EmbeddedResource Include="SQL\GetGraphData.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

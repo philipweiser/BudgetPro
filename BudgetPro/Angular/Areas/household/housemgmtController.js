@@ -8,6 +8,7 @@
         $scope.message = '';
         $scope.gridOptions = {
             data: 'houseData',
+            minRowsToShow: '5',
             columnDefs: [
                 { name: 'Name' },
                 { name: 'Email' }
@@ -42,17 +43,19 @@
         $scope.createHousehold = function () {
             houseSvcs.createHousehold($scope.houseName).then(function (response) {
                 if (response == -2) {
-                    $scope.message = "Leave your current Household before creating a new one."
+                    notifySvcs.error("Leave your current Household before creating a new one.");
                 } else {
-                    $scope.message = "Your Household has been successfully created.";
+                    notifySvcs.success("Your Household has been successfully created.");
                 }
                 $scope.getMembers();
             });
         };
         $scope.joinHousehold = function () {
             houseSvcs.joinHousehold().then(function (response) {
-
                 $scope.getMembers();
+                if (response.status = 200) {
+                    notifySvcs.success("Changes Saved.");
+                }
             })
         }
         $scope.getMembers();
